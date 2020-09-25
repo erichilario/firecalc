@@ -1,0 +1,19 @@
+.calc-form {
+  /*padding-top: 2.75rem;*/
+}
+
+body {
+  background-color: #FFF;
+  background-image: url("../images/fire25.png");
+  background-position: bottom 10px right -170px;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 140%;
+  opacity: 0.90;
+}
+
+.page-header{
+  border-bottom:0px;
+  text-align: center;
+  
+}
