@@ -1,2 +1,0 @@
-# firecalc
-FIRE Calculator
