@@ -7,7 +7,6 @@ npm-debug.*
 *.key
 *.mobileprovision
 *.orig.*
-web-build/
 
 # macOS
 .DS_Store
@@ -34,3 +33,4 @@ yarn-error.log*
 
 .vscode/
 firecalc.code-workspace
+web-build/
