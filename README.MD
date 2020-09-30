@@ -8,6 +8,11 @@ A calculator for the FINANCIAL INDEPENDENCE, RETIRE EARLY movement
 
 In completion of Assignment 2 HIT238 The Mobile Paradigm
 
+## Branches
+
+- [Source Code](https://github.com/erichilario/firecalc/tree/master)
+- [Web Build](https://github.com/erichilario/firecalc/tree/gh-pages) (output of "expo build:web")
+
 [Privacy Policy](https://erichilario.github.io/firecalc/privacypolicy.html)
 
 [Terms and Conditions](https://erichilario.github.io/firecalc/termsconditions.html)
