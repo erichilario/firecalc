@@ -20,6 +20,7 @@ import {
 } from "./screens/RootStackScreen";
 import { ActivityIndicator } from "react-native-paper";
 import { AuthContext } from "./components/context";
+import AsyncStorage from "@react-native-community/async-storage";
 
 // import RootStackScreen from "./screens/RootStackScreen";
 
@@ -74,39 +75,58 @@ const App = () => {
 
   const authContext = React.useMemo(
     () => ({
-      signIn: (userName, password) => {
+      signIn: async (userName, password) => {
         // setUserToken("alkjbvlks");
         // setIsLoading(false);
         let userToken;
         userToken = null;
+
         if (userName == "user" && password == "pass") {
-          userToken = "sdfgndfg";
+          try {
+            console.log("success");
+            await AsyncStorage.setItem("userToken", userToken);
+          } catch (e) {
+            console.log(e);
+          }
+        } else {
+          console.log("fail");
         }
-        console.log("user token: ", userToken);
+        // console.log("user atoken: ", userToken);
+        console.log("userName: ", userName, " || password: ", password);
         dispatch({ type: "LOGIN", id: userName, token: userToken });
       },
-      signOut: () => {
+      signOut: async () => {
         // setUserToken("null");
         // setIsLoading(false);
         //console.log("user token: ", userToken);
+        try {
+          await AsyncStorage.removeItem("userToken");
+        } catch (e) {
+          console.log(e);
+        }
         dispatch({ type: "LOGOUT" });
       },
       signUp: () => {
-        setUserToken("alkjbvlks");
-        setIsLoading(false);
+        // setUserToken("alkjbvlks");
+        // setIsLoading(false);
       },
     }),
     []
   );
 
   useEffect(() => {
-    setTimeout(() => {
+    setTimeout(async () => {
       //setIsLoading(false);
       let userToken;
-      userToken = "fgg;";
-      console.log("user token: ", userToken);
-      dispatch({ type: "RETRIEVE_TOKEN", token: "asdffb" });
-    }, 1000);
+      userToken = null;
+      try {
+        userToken = await AsyncStorage.getItem("userToken");
+      } catch (e) {
+        console.log(e);
+      }
+      //console.log("user token: ", userToken);
+      dispatch({ type: "RETRIEVE_TOKEN", token: userToken });
+    }); // 1000);
   }, []);
 
   if (loginState.isLoading) {

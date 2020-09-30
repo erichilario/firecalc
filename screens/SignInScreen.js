@@ -25,31 +25,44 @@ const SignInScreen = ({ navigation }) => {
     password: "",
     check_textInputChange: false,
     secureTextEntry: true,
+    isValidUser: true,
+    isValidPassword: true,
   });
 
   const { signIn } = React.useContext(AuthContext);
 
   const textInputChange = (val) => {
-    if (val.length != 0) {
+    if (val.trim().length > 4) {
       setData({
         ...data,
-        email: val,
+        username: val,
         check_textInputChange: true,
+        isValidUser: true,
       });
     } else {
       setData({
         ...data,
-        email: val,
+        username: val,
         check_textInputChange: false,
+        isValidUser: false,
       });
     }
   };
 
   const handlePasswordChange = (val) => {
-    setData({
-      ...data,
-      password: val,
-    });
+    if (val.trim().length > 8) {
+      setData({
+        ...data,
+        password: val,
+        isValidPassword: true,
+      });
+    } else {
+      setData({
+        ...data,
+        password: val,
+        isValidPassword: false,
+      });
+    }
   };
 
   const updateSecureTextEntry = () => {
@@ -57,6 +70,21 @@ const SignInScreen = ({ navigation }) => {
       ...data,
       secureTextEntry: !data.secureTextEntry,
     });
+  };
+
+  const handleValidUser = (val) => {
+    if (val.length > 3) {
+      console.log(val);
+      setData({
+        ...data,
+        isValidUser: true,
+      });
+    } else {
+      setData({
+        ...data,
+        isValidUser: false,
+      });
+    }
   };
 
   const loginHandle = (username, password) => {
@@ -78,7 +106,7 @@ const SignInScreen = ({ navigation }) => {
         ]}
         animation="fadeInUpBig"
       >
-        <Text style={styles.text_footer}>Email</Text>
+        <Text style={styles.text_footer}>Username</Text>
         <View style={styles.action}>
           <FontAwesome
             style={{ marginRight: 10 }}
@@ -87,10 +115,11 @@ const SignInScreen = ({ navigation }) => {
             size={20}
           />
           <TextInput
-            placeholder="Email address"
+            placeholder="Username"
             style={styles.textInput}
             autoCapitalize="none"
             onChangeText={(val) => textInputChange(val)}
+            onEndEditing={(evt) => handleValidUser(evt.nativeEvent.text)} // not firing
           />
           {data.check_textInputChange ? (
             <Animatable.View animation="bounceIn">
@@ -103,6 +132,13 @@ const SignInScreen = ({ navigation }) => {
             </Animatable.View>
           ) : null}
         </View>
+        {data.isValidUser ? null : (
+          <Animatable.View animation="fadeInLeft" duration={500}>
+            <Text style={styles.errorMsg}>
+              Username must be 4 characters long.
+            </Text>
+          </Animatable.View>
+        )}
 
         <Text style={[styles.text_footer, { marginTop: 35 }]}>Password</Text>
         <View style={styles.action}>
@@ -137,21 +173,33 @@ const SignInScreen = ({ navigation }) => {
             )}
           </TouchableOpacity>
         </View>
+        {data.isValidPassword ? null : (
+          <Animatable.View animation="fadeInLeft" duration={500}>
+            <Text style={styles.errorMsg}>
+              Password must be 8 characters long.
+            </Text>
+          </Animatable.View>
+        )}
 
-        <View style={styles.button}>
+        <TouchableOpacity>
+          <Text style={{ color: "#009387", marginTop: 15 }}>
+            Forgot password?
+          </Text>
+        </TouchableOpacity>
+        {/* <View style={styles.button}> */}
+        <TouchableOpacity
+          style={styles.signIn}
+          onPress={() => {
+            loginHandle(data.username, data.password);
+          }}
+        >
           <LinearGradient colors={["#f57576", "#a23425"]} style={styles.signIn}>
             {/* <TouchableOpacity onPress={() => navigation.navigate("Home")}> */}
-            <TouchableOpacity
-              onPress={() => {
-                {
-                  loginHandle(data.username, data.password);
-                }
-              }}
-            >
-              <Text style={[styles.textSign, { color: "#fff" }]}> Sign In</Text>
-            </TouchableOpacity>
+
+            <Text style={[styles.textSign, { color: "#fff" }]}> Sign In</Text>
           </LinearGradient>
-        </View>
+        </TouchableOpacity>
+        {/* </View> */}
 
         <TouchableOpacity
           onPress={() => navigation.navigate("SignUpScreen")}
