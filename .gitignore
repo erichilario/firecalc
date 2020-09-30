@@ -34,3 +34,4 @@ yarn-error.log*
 .vscode/
 firecalc.code-workspace
 web-build/
+.expo-shared/
