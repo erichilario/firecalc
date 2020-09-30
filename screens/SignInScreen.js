@@ -16,15 +16,18 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Feather from "react-native-vector-icons/Feather";
 import { NavigationContainer } from "@react-navigation/native";
 import { useTheme } from "@react-navigation/native";
+import { AuthContext } from "../components/context";
 
 const SignInScreen = ({ navigation }) => {
   const { colors } = useTheme();
   const [data, setData] = React.useState({
-    email: "",
+    username: "",
     password: "",
     check_textInputChange: false,
     secureTextEntry: true,
   });
+
+  const { signIn } = React.useContext(AuthContext);
 
   const textInputChange = (val) => {
     if (val.length != 0) {
@@ -54,6 +57,10 @@ const SignInScreen = ({ navigation }) => {
       ...data,
       secureTextEntry: !data.secureTextEntry,
     });
+  };
+
+  const loginHandle = (username, password) => {
+    signIn(username, password);
   };
 
   return (
@@ -132,14 +139,18 @@ const SignInScreen = ({ navigation }) => {
         </View>
 
         <View style={styles.button}>
-          <TouchableOpacity onPress={() => navigation.navigate("Home")}>
-            <LinearGradient
-              colors={["#f57576", "#a23425"]}
-              style={styles.signIn}
+          <LinearGradient colors={["#f57576", "#a23425"]} style={styles.signIn}>
+            {/* <TouchableOpacity onPress={() => navigation.navigate("Home")}> */}
+            <TouchableOpacity
+              onPress={() => {
+                {
+                  loginHandle(data.username, data.password);
+                }
+              }}
             >
               <Text style={[styles.textSign, { color: "#fff" }]}> Sign In</Text>
-            </LinearGradient>
-          </TouchableOpacity>
+            </TouchableOpacity>
+          </LinearGradient>
         </View>
 
         <TouchableOpacity

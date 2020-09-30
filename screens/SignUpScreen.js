@@ -16,6 +16,7 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Feather from "react-native-vector-icons/Feather";
 import { NavigationContainer } from "@react-navigation/native";
 import { useTheme } from "@react-navigation/native";
+import { AuthContext } from "../components/context";
 
 const SignUpScreen = ({ navigation }) => {
   const { colors } = useTheme();
@@ -185,7 +186,9 @@ const SignUpScreen = ({ navigation }) => {
 
         <View style={styles.button}>
           <LinearGradient colors={["#f57576", "#a23425"]} style={styles.signIn}>
-            <Text style={[styles.textSign, { color: "#fff" }]}>Sign Up</Text>
+            <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+              <Text style={[styles.textSign, { color: "#fff" }]}>Sign Up</Text>
+            </TouchableOpacity>
           </LinearGradient>
         </View>
 
