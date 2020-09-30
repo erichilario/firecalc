@@ -1,0 +1,29 @@
+{
+  "files": {
+    "app.js": "/firecalc/static/js/app.d422573c.chunk.js",
+    "app.js.map": "/firecalc/static/js/app.d422573c.chunk.js.map",
+    "runtime~app.js": "/firecalc/static/js/runtime~app.4a8d8b15.js",
+    "runtime~app.js.map": "/firecalc/static/js/runtime~app.4a8d8b15.js.map",
+    "static/js/2.47681fa3.chunk.js": "/firecalc/static/js/2.47681fa3.chunk.js",
+    "static/js/2.47681fa3.chunk.js.map": "/firecalc/static/js/2.47681fa3.chunk.js.map",
+    "fonts/Feather.ttf": "/firecalc/./fonts/Feather.ttf",
+    "fonts/FontAwesome.ttf": "/firecalc/./fonts/FontAwesome.ttf",
+    "fonts/Ionicons.ttf": "/firecalc/./fonts/Ionicons.ttf",
+    "fonts/MaterialCommunityIcons.ttf": "/firecalc/./fonts/MaterialCommunityIcons.ttf",
+    "fonts/MaterialIcons.ttf": "/firecalc/./fonts/MaterialIcons.ttf",
+    "favicon-16.png": "/firecalc/favicon-16.png",
+    "favicon-32.png": "/firecalc/favicon-32.png",
+    "favicon.ico": "/firecalc/favicon.ico",
+    "index.html": "/firecalc/index.html",
+    "manifest.json": "/firecalc/manifest.json",
+    "serve.json": "/firecalc/serve.json",
+    "static/js/2.47681fa3.chunk.js.LICENSE.txt": "/firecalc/static/js/2.47681fa3.chunk.js.LICENSE.txt",
+    "static/media/avatar.jpg": "/firecalc/static/media/avatar.f7471b37.jpg",
+    "static/media/favicon.png": "/firecalc/static/media/favicon.fe8d62f5.png"
+  },
+  "entrypoints": [
+    "static/js/runtime~app.4a8d8b15.js",
+    "static/js/2.47681fa3.chunk.js",
+    "static/js/app.d422573c.chunk.js"
+  ]
+}
