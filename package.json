@@ -1,6 +1,11 @@
 {
+  "homepage": "http://erichilario.github.io/firecalc",
+  "name": "firecalc",
+  "version": "0.1.0",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
+    "predeploy": "expo build:web",
+    "deploy": "gh-pages -d web-build",
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
@@ -32,7 +37,8 @@
     "react-native-web": "^0.12.0"
   },
   "devDependencies": {
-    "@babel/core": "~7.9.0"
+    "@babel/core": "~7.9.0",
+    "gh-pages": "^3.1.0"
   },
   "private": true
 }
