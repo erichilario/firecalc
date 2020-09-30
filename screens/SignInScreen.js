@@ -132,9 +132,14 @@ const SignInScreen = ({ navigation }) => {
         </View>
 
         <View style={styles.button}>
-          <LinearGradient colors={["#08d4c4", "#01ab9d"]} style={styles.signIn}>
-            <Text style={[styles.textSign, { color: "#fff" }]}> Sign In</Text>
-          </LinearGradient>
+          <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+            <LinearGradient
+              colors={["#f57576", "#a23425"]}
+              style={styles.signIn}
+            >
+              <Text style={[styles.textSign, { color: "#fff" }]}> Sign In</Text>
+            </LinearGradient>
+          </TouchableOpacity>
         </View>
 
         <TouchableOpacity
@@ -142,7 +147,7 @@ const SignInScreen = ({ navigation }) => {
           style={[
             styles.signIn,
             {
-              borderColor: "#009387",
+              borderColor: "#f57576",
               borderWidth: 1,
               marginTop: 15,
             },
@@ -152,7 +157,7 @@ const SignInScreen = ({ navigation }) => {
             style={[
               styles.textSign,
               {
-                color: "#009387",
+                color: "#f57576",
               },
             ]}
           >
@@ -228,7 +233,7 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 10,
+    borderRadius: 50,
   },
   textSign: {
     fontSize: 18,
