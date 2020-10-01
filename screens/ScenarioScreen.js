@@ -204,7 +204,7 @@ const ScenarioScreen = () => {
             onPress={() =>
               console.log(
                 "age ",
-                parseInt(initialInputData.age) + 2,
+                initialInputData.age,
                 "rel ",
                 initialInputData.relationshipStatus
               )
@@ -214,9 +214,7 @@ const ScenarioScreen = () => {
               colors={["#f57576", "#a23425"]}
               style={styles.signIn}
             >
-              <Text style={[styles.textSign, { color: "#fff" }]}>
-                Calculate
-              </Text>
+              <Text style={[styles.textSign, { color: "#fff" }]}>Done</Text>
             </LinearGradient>
           </TouchableOpacity>
         </View>
