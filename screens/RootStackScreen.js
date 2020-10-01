@@ -22,7 +22,7 @@ const AboutStack = createStackNavigator();
 const ContactStack = createStackNavigator();
 const ScenarioStack = createStackNavigator();
 
-const RootStackScreen = ({ navigation }) => {
+const RootStackScreen = () => {
   return (
     <RootStack.Navigator headerMode="none">
       <RootStack.Screen name="SplashScreen" component={SplashScreen} />
