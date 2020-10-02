@@ -4,20 +4,8 @@ import { TextInput } from "react-native-paper";
 import { LinearGradient } from "expo-linear-gradient";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { RadioButton } from "react-native-paper";
-//import { zingchart, ZC } from "zingchart/zingchart-es6.min";
 import zingchart from "zingchart/es6";
 import ZingChart from "zingchart-react";
-
-// const ScenarioScreen = ({ navigation }) => {
-//   return (
-//     <View style={styles.container}>
-//       <Button
-//         title="Go to Settings"
-//         onPress={() => navigation.navigate("Settings")}
-//       />
-//     </View>
-//   );
-// };
 
 const ScenarioScreen = () => {
   const [data, setData] = React.useState({
@@ -72,14 +60,6 @@ const ScenarioScreen = () => {
     const annual_deposit = data.annualDeposit;
     const interest_rate = data.interestRate;
     const current_savings = data.currentSavings;
-    // const {
-    //   current_age,
-    //   retirement_age,
-    //   annual_deposit,
-    //   interest_rate,
-    //   current_savings,
-    // } = this.state;
-
     const int = interest_rate / 100;
     const years_data = [];
     const years_until_retirement = Array.from(
@@ -109,12 +89,11 @@ const ScenarioScreen = () => {
     });
   };
   const labels = getChartLabels();
-  const scaleYval =
-    "0:" + data.annualRetIncNum * data.yearsAfterRetirement + ":200000"; // string format for Y-axis value of chart
+  const scaleYval = "0:" + data.annualRetIncNum * data.yearsAfterRetirement; // string format for Y-axis value of chart
   const config = {
     "scale-x": { values: labels, label: { text: "Age" } },
     "scale-y": {
-      //values: scaleYval,
+      values: scaleYval,
       short: true, //To display scale values as short units.
       "short-unit": "K", //To set the short unit type.
       "thousands-separator": ", ",
