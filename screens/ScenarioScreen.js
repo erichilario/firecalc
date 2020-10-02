@@ -1,9 +1,12 @@
 import React from "react";
-import { View, Button, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { TextInput } from "react-native-paper";
 import { LinearGradient } from "expo-linear-gradient";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { RadioButton } from "react-native-paper";
+//import { zingchart, ZC } from "zingchart/zingchart-es6.min";
+import zingchart from "zingchart/es6";
+import ZingChart from "zingchart-react";
 
 // const ScenarioScreen = ({ navigation }) => {
 //   return (
@@ -18,50 +21,142 @@ import { RadioButton } from "react-native-paper";
 
 const ScenarioScreen = () => {
   const [data, setData] = React.useState({
-    age: "",
-    retirementAge: "68",
+    currentAge: 25,
+    retirementAge: 68,
     inputTab: true,
     relationshipStatus: "M",
-    currentSavings: "",
-    annualDeposit: "",
-    interestRate: "",
-    yearsAfterRetirement: "",
-    desiredRetirementIncome: "",
+    currentSavings: 1000,
+    annualDeposit: 6000,
+    interestRate: 8,
+    yearsAfterRetirement: 20,
+    desiredRetirementIncome: 100000,
+    //calc
+    futureValueTwo: 0,
+    onTrack: true,
+    annualRetirementIncome: 0,
+    annualRetIncNum: 0, //the non-string version
+    yearsData: "",
+    chartLabels: getChartLabels,
   });
 
   var today = new Date();
   var currentYear = today.getFullYear();
 
-  //   const [data, setData] = React.useState({
-  //     inputTab: true,
-  //   });
+  const getYearsUntilRetirement = () => {
+    const current_age = data.currentAge;
+    const retirement_age = data.retirementAge;
+    return retirement_age - current_age;
+  };
 
-  //   const initialInputData = {
-  //     inputButton: false,
-  //     age: "21",
-  //     relationshipStatus: "Married",
-  //     income: "99000",
-  //     desiredRetirementAge: "58",
-  //     superannuationBalance: "150000",
-  //     employerContribution: "5%",
-  //   };
+  const calculate = () => {
+    const years_after_retirement = data.yearsAfterRetirement;
+    const desired_retirement_income = data.desiredRetirementIncome;
+    const { future_value, years_data } = futureValue();
+    const annual_retirement_income = future_value / years_after_retirement;
+    const on_track =
+      annual_retirement_income > desired_retirement_income ? true : false;
 
-  //   const handleChange = (event) => {
-  //     const { name, type, text } = event;
-  //     console.log(text);
-  //     let processedData = text;
-  //     if (type === "text") {
-  //       processedData = value.toUpperCase();
-  //     } else if (type === "number") {
-  //       console.log(type);
-  //       processedData = value * 2;
-  //     }
-  //     setState({ [name]: processedData });
-  //   };
+    setData({
+      ...data,
+      yearsData: years_data,
+      futureValueTwo: toUsd(future_value),
+      annualRetirementIncome: toUsd(annual_retirement_income),
+      annualRetIncNum: annual_retirement_income,
+      onTrack: on_track,
+    });
+  };
+
+  const futureValue = () => {
+    const current_age = data.currentAge;
+    const retirement_age = data.retirementAge;
+    const annual_deposit = data.annualDeposit;
+    const interest_rate = data.interestRate;
+    const current_savings = data.currentSavings;
+    // const {
+    //   current_age,
+    //   retirement_age,
+    //   annual_deposit,
+    //   interest_rate,
+    //   current_savings,
+    // } = this.state;
+
+    const int = interest_rate / 100;
+    const years_data = [];
+    const years_until_retirement = Array.from(
+      new Array(getYearsUntilRetirement())
+    );
+    const future_value = years_until_retirement.reduce((sum) => {
+      const last_year_plus_annual_deposit = sum + annual_deposit;
+      const interest_earned = last_year_plus_annual_deposit * int;
+      const new_sum = parseFloat(
+        (last_year_plus_annual_deposit + interest_earned).toFixed(2)
+      );
+
+      years_data.push(new_sum);
+      return new_sum;
+    }, current_savings);
+    return { future_value, years_data };
+  };
+
+  const toUsd = (number) => {
+    return number.toLocaleString("en-AU", {
+      style: "currency",
+      currency: "AUD",
+    });
+  };
+  const labels = getChartLabels();
+  const scaleYval =
+    "0:" + data.annualRetIncNum * data.yearsAfterRetirement + ":200000"; // string format for Y-axis value of chart
+  const config = {
+    "scale-x": { values: labels, label: { text: "Age" } },
+    "scale-y": {
+      values: scaleYval,
+      short: true, //To display scale values as short units.
+      "short-unit": "K", //To set the short unit type.
+      "thousands-separator": ", ",
+      format: "$%v",
+    },
+    plot: {
+      tooltip: {
+        text: "$%v<br>at Age %kv",
+        "thousands-separator": ", ",
+      },
+    },
+    "trend-up": {
+      "line-color": "#ff0",
+    },
+    type: "area",
+    title: { text: "Piggy Bank" },
+    series: [
+      {
+        values: data.yearsData,
+        "background-color": "#f57576 #a23425",
+        marker: { size: 4, "border-color": "#f00", "border-width": 1 },
+      },
+    ],
+  };
+
+  const renderChart = () => {
+    const labels = getChartLabels();
+    const config = {
+      id: "myChart",
+      data: {
+        "scale-x": { labels },
+        type: "area",
+        title: { text: "Piggy Bank" },
+        series: [{ values: data.yearsData }],
+      },
+    };
+    zingchart.render(config);
+  };
+
+  function getChartLabels() {
+    const years = Array.from(new Array(getYearsUntilRetirement()));
+    return years.map((_, i) => i + data.currentAge + 1);
+  }
 
   return (
     <View style={styles.container}>
-      <Text onPress={() => alert(currentYear)}>cc</Text>
       {data.inputTab ? (
         <View
           style={{
@@ -191,17 +286,18 @@ const ScenarioScreen = () => {
             <View style={{ paddingLeft: 5, paddingRight: 5 }}>
               <TextInput
                 label="Age"
+                defaultValue={data.currentAge}
                 placeholder="Enter your current age here"
                 onChangeText={(value) =>
                   setData({
                     ...data,
-                    age: value,
+                    currentAge: value,
                   })
                 }
               />
-
               <TextInput
                 label="Retirement Age"
+                defaultValue={data.retirementAge}
                 placeholder="Desired retirement age"
                 onChangeText={(value) =>
                   setData({
@@ -210,6 +306,62 @@ const ScenarioScreen = () => {
                   })
                 }
               />
+              <TextInput
+                label="Current Savings"
+                defaultValue={data.currentSavings}
+                placeholder="Your current savings"
+                onChangeText={(value) =>
+                  setData({
+                    ...data,
+                    currentSavings: value,
+                  })
+                }
+              />
+              <TextInput
+                label="Annual Deposit"
+                defaultValue={data.annualDeposit}
+                placeholder="Yearly savings deposit"
+                onChangeText={(value) =>
+                  setData({
+                    ...data,
+                    annualDeposit: value,
+                  })
+                }
+              />
+              <TextInput
+                label="Interest Rate"
+                defaultValue={data.interestRate}
+                placeholder="Savings Interest Rate"
+                onChangeText={(value) =>
+                  setData({
+                    ...data,
+                    interestRate: value,
+                  })
+                }
+              />
+              <TextInput
+                label="Years after retirement"
+                defaultValue={data.yearsAfterRetirement}
+                placeholder="Years after retirement"
+                onChangeText={(value) =>
+                  setData({
+                    ...data,
+                    yearsAfterRetirement: value,
+                  })
+                }
+              />
+              <TextInput
+                label="Desired Retirement Income"
+                defaultValue={data.desiredRetirementIncome}
+                placeholder="Desired Retirement Income"
+                onChangeText={(value) =>
+                  setData({
+                    ...data,
+                    desiredRetirementIncome: value,
+                  })
+                }
+              />
+
               <RadioButton.Group
                 onValueChange={(value) =>
                   setData({
@@ -222,14 +374,6 @@ const ScenarioScreen = () => {
                 <RadioButton.Item label="Single" value="S" />
                 <RadioButton.Item label="Married" value="M" />
               </RadioButton.Group>
-              {/* example of radioButton below */}
-              {/* <RadioButton.Group
-                onValueChange={(value) => setValue(value)}
-                value={value}
-              >
-                <RadioButton.Item label="First item" value="first" />
-                <RadioButton.Item label="Second item" value="second" />
-              </RadioButton.Group> */}
               {/* end of Input section View             */}
             </View>
 
@@ -263,18 +407,7 @@ const ScenarioScreen = () => {
                   marginTop: 15,
                 },
               ]}
-              onPress={() =>
-                console.log(
-                  "age ",
-                  parseInt(data.age),
-                  "retirementAge ",
-                  parseInt(data.retirementAge),
-                  "rel ",
-                  data.relationshipStatus,
-                  "year",
-                  currentYear
-                )
-              }
+              onPress={() => calculate()}
             >
               <LinearGradient
                 colors={["#f57576", "#a23425"]}
@@ -286,7 +419,59 @@ const ScenarioScreen = () => {
               </LinearGradient>
             </TouchableOpacity>
           </View>
-        ) : null
+        ) : (
+          /* console.log(
+            "currAge ",
+            parseInt(data.currentAge),
+            "retAge ",
+            parseInt(data.retirementAge),
+            "rel ",
+            data.relationshipStatus,
+            "year",
+            currentYear,
+            "curSav ",
+            data.currentSavings,
+            "annDep ",
+            data.annualDeposit,
+            "intRate ",
+            data.interestRate,
+            "yrsAftRet ",
+            data.yearsAfterRetirement,
+            "desRetInc ",
+            data.desiredRetirementIncome,
+            "future_value",
+            data.futureValueTwo,
+            "years_data",
+            data.yearsData
+          ) */
+          <View>
+            <ZingChart data={config} />
+            {/* <TouchableOpacity
+              onPress={() => renderChart()}
+              style={[
+                styles.inputResult,
+                {
+                  backgroundColor: "#fff",
+                  borderColor: "#f57576",
+                  borderWidth: 1,
+                  padding: 5,
+                },
+              ]}
+            >
+              <Text
+                style={[
+                  styles.textSign,
+                  {
+                    color: "#f57576",
+                  },
+                ]}
+              >
+                Input
+              </Text>
+            </TouchableOpacity> */}
+          </View>
+        )
+
         // Results page goes here
       }
     </View>
