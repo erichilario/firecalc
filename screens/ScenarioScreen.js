@@ -61,7 +61,7 @@ const ScenarioScreen = () => {
 
   return (
     <View style={styles.container}>
-      {/* <Text onPress={() => alert(currentYear)}>cc</Text> */}
+      <Text onPress={() => alert(currentYear)}>cc</Text>
       {data.inputTab ? (
         <View
           style={{
