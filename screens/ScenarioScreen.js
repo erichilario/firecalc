@@ -3,6 +3,7 @@ import { View, Button, Text, StyleSheet } from "react-native";
 import { TextInput } from "react-native-paper";
 import { LinearGradient } from "expo-linear-gradient";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { RadioButton } from "react-native-paper";
 
 // const ScenarioScreen = ({ navigation }) => {
 //   return (
@@ -17,21 +18,50 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 const ScenarioScreen = () => {
   const [data, setData] = React.useState({
+    age: "",
+    retirementAge: "68",
     inputTab: true,
+    relationshipStatus: "M",
+    currentSavings: "",
+    annualDeposit: "",
+    interestRate: "",
+    yearsAfterRetirement: "",
+    desiredRetirementIncome: "",
   });
 
-  const initialInputData = {
-    inputButton: false,
-    age: "21",
-    relationshipStatus: "Married",
-    income: "99000",
-    desiredRetirementAge: "58",
-    superannuationBalance: "150000",
-    employerContribution: "5%",
-  };
+  var today = new Date();
+  var currentYear = today.getFullYear();
+
+  //   const [data, setData] = React.useState({
+  //     inputTab: true,
+  //   });
+
+  //   const initialInputData = {
+  //     inputButton: false,
+  //     age: "21",
+  //     relationshipStatus: "Married",
+  //     income: "99000",
+  //     desiredRetirementAge: "58",
+  //     superannuationBalance: "150000",
+  //     employerContribution: "5%",
+  //   };
+
+  //   const handleChange = (event) => {
+  //     const { name, type, text } = event;
+  //     console.log(text);
+  //     let processedData = text;
+  //     if (type === "text") {
+  //       processedData = value.toUpperCase();
+  //     } else if (type === "number") {
+  //       console.log(type);
+  //       processedData = value * 2;
+  //     }
+  //     setState({ [name]: processedData });
+  //   };
 
   return (
     <View style={styles.container}>
+      {/* <Text onPress={() => alert(currentYear)}>cc</Text> */}
       {data.inputTab ? (
         <View
           style={{
@@ -155,72 +185,110 @@ const ScenarioScreen = () => {
           </TouchableOpacity>
         </View>
       )}
+      {
+        data.inputTab ? (
+          <View>
+            <View style={{ paddingLeft: 5, paddingRight: 5 }}>
+              <TextInput
+                label="Age"
+                placeholder="Enter your current age here"
+                onChangeText={(value) =>
+                  setData({
+                    ...data,
+                    age: value,
+                  })
+                }
+              />
 
-      {data.inputTab ? (
-        <View>
-          <View style={{ paddingLeft: 5, paddingRight: 5 }}>
-            <TextInput
-              label="Age"
-              value={initialInputData.age}
-              onChangeText={(age) => this.setState({ age })}
-            />
-            <TextInput
-              label="Relationship status"
-              value={initialInputData.relationshipStatus}
-              onChangeText={(relationshipStatus) =>
-                this.setState({ relationshipStatus })
+              <TextInput
+                label="Retirement Age"
+                placeholder="Desired retirement age"
+                onChangeText={(value) =>
+                  setData({
+                    ...data,
+                    retirementAge: value,
+                  })
+                }
+              />
+              <RadioButton.Group
+                onValueChange={(value) =>
+                  setData({
+                    ...data,
+                    relationshipStatus: value,
+                  })
+                }
+                value={data.relationshipStatus}
+              >
+                <RadioButton.Item label="Single" value="S" />
+                <RadioButton.Item label="Married" value="M" />
+              </RadioButton.Group>
+              {/* example of radioButton below */}
+              {/* <RadioButton.Group
+                onValueChange={(value) => setValue(value)}
+                value={value}
+              >
+                <RadioButton.Item label="First item" value="first" />
+                <RadioButton.Item label="Second item" value="second" />
+              </RadioButton.Group> */}
+              {/* end of Input section View             */}
+            </View>
+
+            <TouchableOpacity
+              style={[
+                styles.signIn,
+                {
+                  borderColor: "#f57576",
+                  borderWidth: 1,
+                  marginTop: 15,
+                },
+              ]}
+              onPress={() => console.log("Pressed")}
+            >
+              <LinearGradient
+                colors={["#f57576", "#a23425"]}
+                style={styles.signIn}
+              >
+                <Text style={[styles.textSign, { color: "#fff" }]}>
+                  Advanced
+                </Text>
+              </LinearGradient>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={[
+                styles.signIn,
+                {
+                  borderColor: "#f57576",
+                  borderWidth: 1,
+                  marginTop: 15,
+                },
+              ]}
+              onPress={() =>
+                console.log(
+                  "age ",
+                  parseInt(data.age),
+                  "retirementAge ",
+                  parseInt(data.retirementAge),
+                  "rel ",
+                  data.relationshipStatus,
+                  "year",
+                  currentYear
+                )
               }
-            />
+            >
+              <LinearGradient
+                colors={["#f57576", "#a23425"]}
+                style={styles.signIn}
+              >
+                <Text style={[styles.textSign, { color: "#fff" }]}>
+                  Calculate
+                </Text>
+              </LinearGradient>
+            </TouchableOpacity>
           </View>
-
-          <TouchableOpacity
-            style={[
-              styles.signIn,
-              {
-                borderColor: "#f57576",
-                borderWidth: 1,
-                marginTop: 15,
-              },
-            ]}
-            onPress={() => console.log("Pressed")}
-          >
-            <LinearGradient
-              colors={["#f57576", "#a23425"]}
-              style={styles.signIn}
-            >
-              <Text style={[styles.textSign, { color: "#fff" }]}>Advanced</Text>
-            </LinearGradient>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={[
-              styles.signIn,
-              {
-                borderColor: "#f57576",
-                borderWidth: 1,
-                marginTop: 15,
-              },
-            ]}
-            onPress={() =>
-              console.log(
-                "age ",
-                parseInt(initialInputData.age) + 2,
-                "rel ",
-                initialInputData.relationshipStatus
-              )
-            }
-          >
-            <LinearGradient
-              colors={["#f57576", "#a23425"]}
-              style={styles.signIn}
-            >
-              <Text style={[styles.textSign, { color: "#fff" }]}>
-                Calculate
-              </Text>
-            </LinearGradient>
-          </TouchableOpacity>
-        </View>
-      ) : null}
+        ) : null
+        // Results page goes here
+      }
     </View>
   );
 };
@@ -251,5 +319,13 @@ const styles = StyleSheet.create({
     height: 30,
     justifyContent: "center",
     alignItems: "center",
+  },
+  buttonView: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  label: {
+    flex: 1,
+    flexWrap: "wrap",
   },
 });
