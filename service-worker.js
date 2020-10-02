@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/firecalc/precache-manifest.a53eb02730e303a56a38b3d707fd5f33.js"
+  "/firecalc/precache-manifest.0087df9956f2c57a9c454c9665c36e2a.js"
 );
 
 workbox.skipWaiting();
