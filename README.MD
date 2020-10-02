@@ -1,7 +1,3 @@
-[![Build Status][build-badge]][build]
-[![Version][version-badge]][package]
-[![MIT License][license-badge]][license]
-
 ![FIRE Calc logo](https://erichilario.github.io/firecalc/favicon-32.png)
 
 # FIRE Calc
@@ -13,7 +9,7 @@ A calculator for the FINANCIAL INDEPENDENCE, RETIRE EARLY movement
 Run the app to see it in action
 
 - [Github pages](https://github.com/erichilario/firecalc/tree/gh-pages)
-- [Expo.io](https://expo.io/@ehilario/firecalc)
+- [Expo.io (broken)](https://expo.io/@ehilario/firecalc)
 
 ## Purpose
 
