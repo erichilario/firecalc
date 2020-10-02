@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, Button, StyleSheet } from "react-native";
 import { TextInput } from "react-native-paper";
 import { LinearGradient } from "expo-linear-gradient";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -85,6 +85,10 @@ const ScenarioScreen = () => {
     const years_until_retirement = Array.from(
       new Array(getYearsUntilRetirement())
     );
+    setData({
+      ...data,
+      yearsData: "",
+    });
     const future_value = years_until_retirement.reduce((sum) => {
       const last_year_plus_annual_deposit = sum + annual_deposit;
       const interest_earned = last_year_plus_annual_deposit * int;
@@ -110,7 +114,7 @@ const ScenarioScreen = () => {
   const config = {
     "scale-x": { values: labels, label: { text: "Age" } },
     "scale-y": {
-      values: scaleYval,
+      //values: scaleYval,
       short: true, //To display scale values as short units.
       "short-unit": "K", //To set the short unit type.
       "thousands-separator": ", ",
@@ -122,16 +126,19 @@ const ScenarioScreen = () => {
         "thousands-separator": ", ",
       },
     },
-    "trend-up": {
-      "line-color": "#ff0",
-    },
     type: "area",
     title: { text: "Piggy Bank" },
     series: [
       {
         values: data.yearsData,
-        "background-color": "#f57576 #a23425",
-        marker: { size: 4, "border-color": "#f00", "border-width": 1 },
+        "background-color": "#a23425",
+        "line-color": "#ea4646",
+        marker: {
+          "background-color": "#ff7878",
+          size: 4,
+          //   "border-color": "#f00",
+          //   "border-width": 1,
+        },
       },
     ],
   };
@@ -152,7 +159,7 @@ const ScenarioScreen = () => {
 
   function getChartLabels() {
     const years = Array.from(new Array(getYearsUntilRetirement()));
-    return years.map((_, i) => i + data.currentAge + 1);
+    return years.map((_, i) => i + parseInt(data.currentAge) + 1);
   }
 
   return (
@@ -420,32 +427,36 @@ const ScenarioScreen = () => {
             </TouchableOpacity>
           </View>
         ) : (
-          /* console.log(
-            "currAge ",
-            parseInt(data.currentAge),
-            "retAge ",
-            parseInt(data.retirementAge),
-            "rel ",
-            data.relationshipStatus,
-            "year",
-            currentYear,
-            "curSav ",
-            data.currentSavings,
-            "annDep ",
-            data.annualDeposit,
-            "intRate ",
-            data.interestRate,
-            "yrsAftRet ",
-            data.yearsAfterRetirement,
-            "desRetInc ",
-            data.desiredRetirementIncome,
-            "future_value",
-            data.futureValueTwo,
-            "years_data",
-            data.yearsData
-          ) */
           <View>
             <ZingChart data={config} />
+            <Button
+              onPress={() =>
+                console.log(
+                  "currAge ",
+                  parseInt(data.currentAge),
+                  "retAge ",
+                  parseInt(data.retirementAge),
+                  "rel ",
+                  data.relationshipStatus,
+                  "year",
+                  currentYear,
+                  "curSav ",
+                  data.currentSavings,
+                  "annDep ",
+                  data.annualDeposit,
+                  "intRate ",
+                  data.interestRate,
+                  "yrsAftRet ",
+                  data.yearsAfterRetirement,
+                  "desRetInc ",
+                  data.desiredRetirementIncome,
+                  "future_value",
+                  data.futureValueTwo,
+                  "years_data",
+                  data.yearsData
+                )
+              }
+            />
             {/* <TouchableOpacity
               onPress={() => renderChart()}
               style={[

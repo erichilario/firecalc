@@ -21,6 +21,8 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "A calculator for the FINANCIAL INDEPENDENCE, RETIRE EARLY movement",
+    "githubUrl": "https://github.com/erichilario/firecalc"
   }
 }
