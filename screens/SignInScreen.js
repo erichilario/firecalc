@@ -87,6 +87,11 @@ const SignInScreen = ({ navigation }) => {
     }
   };
 
+  function logMeIn(username, password) {
+    signIn(username, password);
+    location.reload();
+  }
+
   const loginHandle = (username, password) => {
     signIn(username, password);
   };
@@ -190,7 +195,8 @@ const SignInScreen = ({ navigation }) => {
         <TouchableOpacity
           style={styles.signIn}
           onPress={() => {
-            loginHandle(data.username, data.password);
+            //loginHandle(data.username, data.password);
+            logMeIn(data.username, data.password);
           }}
         >
           <LinearGradient colors={["#f57576", "#a23425"]} style={styles.signIn}>
