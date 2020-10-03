@@ -1,3 +1,6 @@
+// =============================
+// SignInScreen.js
+// =============================
 import React from "react";
 import {
   View,
@@ -7,7 +10,6 @@ import {
   Platform,
   StyleSheet,
   StatusBar,
-  Alert,
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import * as Animatable from "react-native-animatable";
@@ -17,6 +19,7 @@ import Feather from "react-native-vector-icons/Feather";
 import { NavigationContainer } from "@react-navigation/native";
 import { useTheme } from "@react-navigation/native";
 import { AuthContext } from "../components/context";
+import Users from "../model/users";
 
 const SignInScreen = ({ navigation }) => {
   const { colors } = useTheme();
@@ -32,7 +35,7 @@ const SignInScreen = ({ navigation }) => {
   const { signIn } = React.useContext(AuthContext);
 
   const textInputChange = (val) => {
-    if (val.trim().length > 4) {
+    if (val.trim().length >= 4) {
       setData({
         ...data,
         username: val,
@@ -50,7 +53,7 @@ const SignInScreen = ({ navigation }) => {
   };
 
   const handlePasswordChange = (val) => {
-    if (val.trim().length > 8) {
+    if (val.trim().length >= 8) {
       setData({
         ...data,
         password: val,
@@ -87,9 +90,20 @@ const SignInScreen = ({ navigation }) => {
     }
   };
 
-  function logMeIn(username, password) {
-    signIn(username, password);
-    location.reload();
+  function logMeIn(userName, password) {
+    const foundUser = Users.filter((item) => {
+      return userName == item.username && password == item.password;
+    });
+
+    if (foundUser.length == 0) {
+      alert("Username or password is incorrect.");
+      // Alert.alert("Invalid user!", "Username or password is incorrect.", [
+      //   { text: "Okay" },
+      // ]);
+      return;
+    }
+    signIn(foundUser);
+    window.location.reload();
   }
 
   const loginHandle = (username, password) => {
@@ -124,7 +138,8 @@ const SignInScreen = ({ navigation }) => {
             style={styles.textInput}
             autoCapitalize="none"
             onChangeText={(val) => textInputChange(val)}
-            onEndEditing={(evt) => handleValidUser(evt.nativeEvent.text)} // not firing
+            // onEndEditing={(evt) => handleValidUser(evt.nativeEvent.text)} // not firing
+            onEndEditing={(evt) => console.log(evt.nativeEvent.text)}
           />
           {data.check_textInputChange ? (
             <Animatable.View animation="bounceIn">
@@ -181,7 +196,7 @@ const SignInScreen = ({ navigation }) => {
         {data.isValidPassword ? null : (
           <Animatable.View animation="fadeInLeft" duration={500}>
             <Text style={styles.errorMsg}>
-              Password must be 8 characters long.
+              Password must be 8 or more characters long.
             </Text>
           </Animatable.View>
         )}

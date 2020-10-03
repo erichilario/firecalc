@@ -1,3 +1,6 @@
+// =============================
+// App.js
+// =============================
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect } from "react";
 import { View } from "react-native";
@@ -21,6 +24,7 @@ import {
 import { ActivityIndicator } from "react-native-paper";
 import { AuthContext } from "./components/context";
 import AsyncStorage from "@react-native-community/async-storage";
+// import Users from "./model/users";
 
 // import RootStackScreen from "./screens/RootStackScreen";
 
@@ -75,24 +79,26 @@ const App = () => {
 
   const authContext = React.useMemo(
     () => ({
-      signIn: async (userName, password) => {
+      signIn: async (foundUser) => {
         // setUserToken("alkjbvlks");
         // setIsLoading(false);
-        let userToken;
-        userToken = null;
 
-        if (userName == "user" && password == "pass") {
-          try {
-            console.log("success");
-            await AsyncStorage.setItem("userToken", userToken);
-          } catch (e) {
-            console.log(e);
-          }
-        } else {
-          console.log("fail");
+        const userToken = String(foundUser[0].userToken);
+        const userName = foundUser[0].username;
+
+        // if (userName == "user" && password == "pass") {
+
+        try {
+          console.log("success");
+          await AsyncStorage.setItem("userToken", userToken);
+        } catch (e) {
+          console.log(e);
         }
-        // console.log("user atoken: ", userToken);
-        console.log("userName: ", userName, " || password: ", password);
+        // } else {
+        //   console.log("fail");
+        // }
+        // // console.log("user atoken: ", userToken);
+        // console.log("userName: ", userName, " || password: ", password);
         dispatch({ type: "LOGIN", id: userName, token: userToken });
       },
       signOut: async () => {
