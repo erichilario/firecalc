@@ -47,8 +47,8 @@ const ScenarioScreen = () => {
     setData({
       ...data,
       yearsData: years_data,
-      futureValueTwo: toUsd(future_value),
-      annualRetirementIncome: toUsd(annual_retirement_income),
+      futureValueTwo: toAud(future_value),
+      annualRetirementIncome: toAud(annual_retirement_income),
       annualRetIncNum: annual_retirement_income,
       onTrack: on_track,
     });
@@ -82,12 +82,14 @@ const ScenarioScreen = () => {
     return { future_value, years_data };
   };
 
-  const toUsd = (number) => {
+  const toAud = (number) => {
     return number.toLocaleString("en-AU", {
       style: "currency",
       currency: "AUD",
     });
   };
+
+  // zingchart stuff
   const labels = getChartLabels();
   const scaleYval = "0:" + data.annualRetIncNum * data.yearsAfterRetirement; // string format for Y-axis value of chart
   const config = {
@@ -96,17 +98,21 @@ const ScenarioScreen = () => {
       values: scaleYval,
       short: true, //To display scale values as short units.
       "short-unit": "K", //To set the short unit type.
-      "thousands-separator": ", ",
+      "thousands-separator": ",",
       format: "$%v",
+      item: {
+        "font-size": 10,
+        angle: -30,
+      },
     },
     plot: {
       tooltip: {
         text: "$%v<br>at Age %kv",
-        "thousands-separator": ", ",
+        "thousands-separator": ",",
       },
     },
     type: "area",
-    title: { text: "Piggy Bank" },
+    title: { text: "Projected Results", fontSize: 12 },
     series: [
       {
         values: data.yearsData,
@@ -115,25 +121,9 @@ const ScenarioScreen = () => {
         marker: {
           "background-color": "#ff7878",
           size: 4,
-          //   "border-color": "#f00",
-          //   "border-width": 1,
         },
       },
     ],
-  };
-
-  const renderChart = () => {
-    const labels = getChartLabels();
-    const config = {
-      id: "myChart",
-      data: {
-        "scale-x": { labels },
-        type: "area",
-        title: { text: "Piggy Bank" },
-        series: [{ values: data.yearsData }],
-      },
-    };
-    zingchart.render(config);
   };
 
   function getChartLabels() {
@@ -266,204 +256,188 @@ const ScenarioScreen = () => {
           </TouchableOpacity>
         </View>
       )}
-      {
-        data.inputTab ? (
-          <View>
-            <View style={{ paddingLeft: 5, paddingRight: 5 }}>
-              <TextInput
-                label="Age"
-                defaultValue={data.currentAge}
-                placeholder="Enter your current age here"
-                onChangeText={(value) =>
-                  setData({
-                    ...data,
-                    currentAge: value,
-                  })
-                }
-              />
-              <TextInput
-                label="Retirement Age"
-                defaultValue={data.retirementAge}
-                placeholder="Desired retirement age"
-                onChangeText={(value) =>
-                  setData({
-                    ...data,
-                    retirementAge: value,
-                  })
-                }
-              />
-              <TextInput
-                label="Current Savings"
-                defaultValue={data.currentSavings}
-                placeholder="Your current savings"
-                onChangeText={(value) =>
-                  setData({
-                    ...data,
-                    currentSavings: value,
-                  })
-                }
-              />
-              <TextInput
-                label="Annual Deposit"
-                defaultValue={data.annualDeposit}
-                placeholder="Yearly savings deposit"
-                onChangeText={(value) =>
-                  setData({
-                    ...data,
-                    annualDeposit: value,
-                  })
-                }
-              />
-              <TextInput
-                label="Interest Rate"
-                defaultValue={data.interestRate}
-                placeholder="Savings Interest Rate"
-                onChangeText={(value) =>
-                  setData({
-                    ...data,
-                    interestRate: value,
-                  })
-                }
-              />
-              <TextInput
-                label="Years after retirement"
-                defaultValue={data.yearsAfterRetirement}
-                placeholder="Years after retirement"
-                onChangeText={(value) =>
-                  setData({
-                    ...data,
-                    yearsAfterRetirement: value,
-                  })
-                }
-              />
-              <TextInput
-                label="Desired Retirement Income"
-                defaultValue={data.desiredRetirementIncome}
-                placeholder="Desired Retirement Income"
-                onChangeText={(value) =>
-                  setData({
-                    ...data,
-                    desiredRetirementIncome: value,
-                  })
-                }
-              />
-
-              <RadioButton.Group
-                onValueChange={(value) =>
-                  setData({
-                    ...data,
-                    relationshipStatus: value,
-                  })
-                }
-                value={data.relationshipStatus}
-              >
-                <RadioButton.Item label="Single" value="S" />
-                <RadioButton.Item label="Married" value="M" />
-              </RadioButton.Group>
-              {/* end of Input section View             */}
-            </View>
-
-            <TouchableOpacity
-              style={[
-                styles.signIn,
-                {
-                  borderColor: "#f57576",
-                  borderWidth: 1,
-                  marginTop: 15,
-                },
-              ]}
-              onPress={() => console.log("Pressed")}
-            >
-              <LinearGradient
-                colors={["#f57576", "#a23425"]}
-                style={styles.signIn}
-              >
-                <Text style={[styles.textSign, { color: "#fff" }]}>
-                  Advanced
-                </Text>
-              </LinearGradient>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={[
-                styles.signIn,
-                {
-                  borderColor: "#f57576",
-                  borderWidth: 1,
-                  marginTop: 15,
-                },
-              ]}
-              onPress={() => calculate()}
-            >
-              <LinearGradient
-                colors={["#f57576", "#a23425"]}
-                style={styles.signIn}
-              >
-                <Text style={[styles.textSign, { color: "#fff" }]}>
-                  Calculate
-                </Text>
-              </LinearGradient>
-            </TouchableOpacity>
-          </View>
-        ) : (
-          <View>
-            <ZingChart data={config} />
-            <Button
-              onPress={() =>
-                console.log(
-                  "currAge ",
-                  parseInt(data.currentAge),
-                  "retAge ",
-                  parseInt(data.retirementAge),
-                  "rel ",
-                  data.relationshipStatus,
-                  "year",
-                  currentYear,
-                  "curSav ",
-                  data.currentSavings,
-                  "annDep ",
-                  data.annualDeposit,
-                  "intRate ",
-                  data.interestRate,
-                  "yrsAftRet ",
-                  data.yearsAfterRetirement,
-                  "desRetInc ",
-                  data.desiredRetirementIncome,
-                  "future_value",
-                  data.futureValueTwo,
-                  "years_data",
-                  data.yearsData
-                )
+      {data.inputTab ? (
+        <View>
+          <View style={{ paddingLeft: 5, paddingRight: 5 }}>
+            <TextInput
+              label="Age"
+              defaultValue={data.currentAge}
+              placeholder="Enter your current age here"
+              onChangeText={(value) =>
+                setData({
+                  ...data,
+                  currentAge: value,
+                })
               }
             />
-            {/* <TouchableOpacity
-              onPress={() => renderChart()}
-              style={[
-                styles.inputResult,
-                {
-                  backgroundColor: "#fff",
-                  borderColor: "#f57576",
-                  borderWidth: 1,
-                  padding: 5,
-                },
-              ]}
-            >
-              <Text
-                style={[
-                  styles.textSign,
-                  {
-                    color: "#f57576",
-                  },
-                ]}
-              >
-                Input
-              </Text>
-            </TouchableOpacity> */}
-          </View>
-        )
+            <TextInput
+              label="Retirement Age"
+              defaultValue={data.retirementAge}
+              placeholder="Desired retirement age"
+              onChangeText={(value) =>
+                setData({
+                  ...data,
+                  retirementAge: value,
+                })
+              }
+            />
+            <TextInput
+              label="Current Savings"
+              defaultValue={data.currentSavings}
+              placeholder="Your current savings"
+              onChangeText={(value) =>
+                setData({
+                  ...data,
+                  currentSavings: value,
+                })
+              }
+            />
+            <TextInput
+              label="Annual Deposit"
+              defaultValue={data.annualDeposit}
+              placeholder="Yearly savings deposit"
+              onChangeText={(value) =>
+                setData({
+                  ...data,
+                  annualDeposit: value,
+                })
+              }
+            />
+            <TextInput
+              label="Interest Rate"
+              defaultValue={data.interestRate}
+              placeholder="Savings Interest Rate"
+              onChangeText={(value) =>
+                setData({
+                  ...data,
+                  interestRate: value,
+                })
+              }
+            />
+            <TextInput
+              label="Years after retirement"
+              defaultValue={data.yearsAfterRetirement}
+              placeholder="Years after retirement"
+              onChangeText={(value) =>
+                setData({
+                  ...data,
+                  yearsAfterRetirement: value,
+                })
+              }
+            />
+            <TextInput
+              label="Desired Retirement Income"
+              defaultValue={data.desiredRetirementIncome}
+              placeholder="Desired Retirement Income"
+              onChangeText={(value) =>
+                setData({
+                  ...data,
+                  desiredRetirementIncome: value,
+                })
+              }
+            />
 
+            {/* <RadioButton.Group
+              onValueChange={(value) =>
+                setData({
+                  ...data,
+                  relationshipStatus: value,
+                })
+              }
+              value={data.relationshipStatus}
+            >
+              <RadioButton.Item label="Single" value="S" />
+              <RadioButton.Item label="Married" value="M" />
+            </RadioButton.Group> */}
+            {/* end of Input section View             */}
+          </View>
+
+          <TouchableOpacity
+            style={[
+              styles.signIn,
+              {
+                borderColor: "#f57576",
+                borderWidth: 1,
+                marginTop: 15,
+              },
+            ]}
+            onPress={() => console.log("Pressed")}
+          >
+            <LinearGradient
+              colors={["#f57576", "#a23425"]}
+              style={styles.signIn}
+            >
+              <Text style={[styles.textSign, { color: "#fff" }]}>Advanced</Text>
+            </LinearGradient>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={[
+              styles.signIn,
+              {
+                borderColor: "#f57576",
+                borderWidth: 1,
+                marginTop: 15,
+              },
+            ]}
+            onPress={() => calculate()}
+          >
+            <LinearGradient
+              colors={["#f57576", "#a23425"]}
+              style={styles.signIn}
+            >
+              <Text style={[styles.textSign, { color: "#fff" }]}>
+                Calculate
+              </Text>
+            </LinearGradient>
+          </TouchableOpacity>
+        </View>
+      ) : (
         // Results page goes here
-      }
+        <View style={styles.zingchartStyle}>
+          <ZingChart style={styles.zingchartStyle} data={config} />
+          <Text style={styles.info}>
+            Total Retirement Savings: {toAud(data.futureValueTwo)}
+          </Text>
+          {data.onTrack ? (
+            <Text style={styles.success}>
+              Annual Retirement Income: {toAud(data.annualRetirementIncome)}
+            </Text>
+          ) : (
+            <Text style={styles.danger}>
+              Annual Retirement Income: {toAud(data.annualRetirementIncome)}
+            </Text>
+          )}
+          {/* <Button
+            onPress={() =>
+              console.log(
+                "currAge ",
+                parseInt(data.currentAge),
+                "retAge ",
+                parseInt(data.retirementAge),
+                "rel ",
+                data.relationshipStatus,
+                "year",
+                currentYear,
+                "curSav ",
+                data.currentSavings,
+                "annDep ",
+                data.annualDeposit,
+                "intRate ",
+                data.interestRate,
+                "yrsAftRet ",
+                data.yearsAfterRetirement,
+                "desRetInc ",
+                data.desiredRetirementIncome,
+                "future_value",
+                data.futureValueTwo,
+                "years_data",
+                data.yearsData
+              )
+            }
+          /> */}
+        </View>
+      )}
     </View>
   );
 };
@@ -502,5 +476,29 @@ const styles = StyleSheet.create({
   label: {
     flex: 1,
     flexWrap: "wrap",
+  },
+  success: {
+    textAlign: "center",
+    margin: 10,
+    padding: 10,
+    color: "#3c763d",
+    backgroundColor: "#dff0d8",
+    borderColor: "#d6e9c6",
+  },
+  danger: {
+    backgroundColor: "#ebcccc",
+    textAlign: "center",
+    margin: 10,
+    padding: 10,
+  },
+  info: {
+    backgroundColor: "#d9edf7",
+    textAlign: "center",
+    margin: 10,
+    padding: 10,
+  },
+  zingchartStyle: {
+    margin: 0,
+    padding: 0,
   },
 });
