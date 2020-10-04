@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Button, StyleSheet } from "react-native";
 
-const ContactScreen = () => {
+const ContactScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text>Contact Screen</Text>

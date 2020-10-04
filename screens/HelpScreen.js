@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Button, StyleSheet } from "react-native";
 
-const HelpScreen = () => {
+const HelpScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text>Help Screen</Text>
