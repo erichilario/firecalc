@@ -8,6 +8,7 @@ import { DrawerContent } from "./screens/DrawerContent";
 
 import Icon from "react-native-vector-icons/Ionicons";
 
+import RootStackScreen from "./screens/RootStackScreen";
 import HomeScreen from "./screens/HomeScreen";
 import SettingsScreen from "./screens/SettingsScreen";
 import HelpScreen from "./screens/HelpScreen";
@@ -17,6 +18,9 @@ import ContactScreen from "./screens/ContactScreen";
 const HomeStack = createStackNavigator();
 const SettingsStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
+const HelpStack = createStackNavigator();
+const AboutStack = createStackNavigator();
+const ContactStack = createStackNavigator();
 
 const HomeStackScreen = ({ navigation }) => {
   return (
@@ -35,7 +39,7 @@ const HomeStackScreen = ({ navigation }) => {
         name="Home"
         component={HomeScreen}
         options={{
-          title: "Overview",
+          title: "Home",
           headerLeft: () => (
             <Icon.Button
               name="ios-menu"
@@ -81,16 +85,110 @@ const SettingsStackScreen = ({ navigation }) => {
   );
 };
 
+const HelpStackScreen = ({ navigation }) => {
+  return (
+    <HelpStack.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: "#009387",
+        },
+        headerTintColor: "#fff",
+        headerTitleStyle: {
+          fontWeight: "bold",
+        },
+      }}
+    >
+      <HelpStack.Screen
+        name="Help"
+        component={HelpScreen}
+        options={{
+          headerLeft: () => (
+            <Icon.Button
+              name="ios-menu"
+              size={25}
+              backgroundColor="#009387"
+              onPress={() => navigation.openDrawer()}
+            ></Icon.Button>
+          ),
+        }}
+      />
+    </HelpStack.Navigator>
+  );
+};
+
+const AboutStackScreen = ({ navigation }) => {
+  return (
+    <AboutStack.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: "#009387",
+        },
+        headerTintColor: "#fff",
+        headerTitleStyle: {
+          fontWeight: "bold",
+        },
+      }}
+    >
+      <AboutStack.Screen
+        name="About"
+        component={AboutScreen}
+        options={{
+          headerLeft: () => (
+            <Icon.Button
+              name="ios-menu"
+              size={25}
+              backgroundColor="#009387"
+              onPress={() => navigation.openDrawer()}
+            ></Icon.Button>
+          ),
+        }}
+      />
+    </AboutStack.Navigator>
+  );
+};
+
+const ContactStackScreen = ({ navigation }) => {
+  return (
+    <ContactStack.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: "#009387",
+        },
+        headerTintColor: "#fff",
+        headerTitleStyle: {
+          fontWeight: "bold",
+        },
+      }}
+    >
+      <ContactStack.Screen
+        name="Contact"
+        component={ContactScreen}
+        options={{
+          headerLeft: () => (
+            <Icon.Button
+              name="ios-menu"
+              size={25}
+              backgroundColor="#009387"
+              onPress={() => navigation.openDrawer()}
+            ></Icon.Button>
+          ),
+        }}
+      />
+    </ContactStack.Navigator>
+  );
+};
+
 const App = () => {
   return (
     <NavigationContainer>
-      <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
+      <RootStackScreen />
+      {/* <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
         <Drawer.Screen name="Home" component={HomeStackScreen} />
         <Drawer.Screen name="Settings" component={SettingsStackScreen} />
-        <Drawer.Screen name="Help" component={HelpScreen} />
-        <Drawer.Screen name="About" component={AboutScreen} />
-        <Drawer.Screen name="Contact" component={ContactScreen} />
-      </Drawer.Navigator>
+        <Drawer.Screen name="Help" component={HelpStackScreen} />
+        <Drawer.Screen name="About" component={AboutStackScreen} />
+        <Drawer.Screen name="Contact" component={ContactStackScreen} />
+      </Drawer.Navigator> */}
     </NavigationContainer>
   );
 };
