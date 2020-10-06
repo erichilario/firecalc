@@ -234,7 +234,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     paddingHorizontal: 20,
     paddingBottom: 50,
-    textAlign: "center",
+    //textAlign: "center",
   },
   footer: {
     flex: 3,
