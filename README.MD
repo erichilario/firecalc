@@ -15,6 +15,7 @@ Run the app to see it in action:
 ## Demo
 
 _(as of 3/10/20; will be updated as the project progresses)_
+
 <img src="https://raw.githubusercontent.com/erichilario/firecalc/results-infobox/demo/2020-10-03%2018-46-36.gif" width="360">
 
 ## Trello
