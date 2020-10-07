@@ -1,6 +1,3 @@
-// =============================
-// SplashScreen.js
-// =============================
 import React, { useState } from "react";
 import {
   View,
@@ -33,7 +30,7 @@ const SplashScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <StatusBar backgroundColor="#009387" barStyle="light-content" />
+      <StatusBar backgroundColor="#f57576" barStyle="light-content" />
       <View style={styles.header}>
         <Animatable.Image
           animation="bounceIn"
@@ -85,8 +82,8 @@ const SplashScreen = ({ navigation }) => {
         <ScrollView>
           <Text style={styles.text}>{termsConds}</Text>
         </ScrollView>
-        <View style={styles.button}>
-          <TouchableOpacity onPress={() => navigation.navigate("SignInScreen")}>
+        <TouchableOpacity onPress={() => navigation.navigate("SignInScreen")}>
+          <View style={styles.button}>
             <LinearGradient
               colors={["#f57576", "#a23425"]}
               style={styles.signIn}
@@ -94,8 +91,8 @@ const SplashScreen = ({ navigation }) => {
               <Text style={styles.textSign}>Continue</Text>
               <MaterialIcons name="navigate-next" color="#fff" size={20} />
             </LinearGradient>
-          </TouchableOpacity>
-        </View>
+          </View>
+        </TouchableOpacity>
       </Animatable.View>
     </View>
   );

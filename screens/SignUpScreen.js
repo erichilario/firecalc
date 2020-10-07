@@ -78,7 +78,7 @@ const SignUpScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <StatusBar backgroundColor="#009387" barStyle="light-content" />
+      <StatusBar backgroundColor="#f57576" barStyle="light-content" />
       <View style={styles.header}>
         <Text style={styles.text_header}>Sign Up</Text>
       </View>
@@ -234,7 +234,6 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     paddingHorizontal: 20,
     paddingBottom: 50,
-    //textAlign: "center",
   },
   footer: {
     flex: 3,

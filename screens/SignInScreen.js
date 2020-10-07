@@ -103,7 +103,7 @@ const SignInScreen = ({ navigation }) => {
       return;
     }
     signIn(foundUser);
-    window.location.reload();
+    //location.reload();
   }
 
   const loginHandle = (username, password) => {
@@ -112,7 +112,7 @@ const SignInScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <StatusBar backgroundColor="#009387" barStyle="light-content" />
+      <StatusBar backgroundColor="#f57576" barStyle="light-content" />
       <View style={styles.header}>
         <Text style={styles.text_header}>Login</Text>
       </View>
@@ -202,7 +202,7 @@ const SignInScreen = ({ navigation }) => {
         )}
 
         <TouchableOpacity>
-          <Text style={{ color: "#009387", marginTop: 15 }}>
+          <Text style={{ color: "#999999", marginTop: 10, marginBottom: 20 }}>
             Forgot password?
           </Text>
         </TouchableOpacity>
