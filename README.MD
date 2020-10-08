@@ -10,11 +10,12 @@ Many of the concepts of FIRE is discussed in [these subreddits](https://reddit.c
 Run the app to see it in action:
 
 - [Github pages](https://github.com/erichilario/firecalc/tree/gh-pages)
-- [Expo.io](https://expo.io/@ehilario/firecalc) _([currently broken](https://github.com/erichilario/firecalc/issues/3#issue-713856467))_
+- [Expo.io](https://expo.io/@ehilario/firecalc)
 
 ## Demo
 
 _(as of 3/10/20; will be updated as the project progresses)_
+
 <img src="https://raw.githubusercontent.com/erichilario/firecalc/results-infobox/demo/2020-10-03%2018-46-36.gif" width="360">
 
 ## Trello

@@ -115,6 +115,7 @@ const SignInScreen = ({ navigation }) => {
       <StatusBar backgroundColor="#f57576" barStyle="light-content" />
       <View style={styles.header}>
         <Text style={styles.text_header}>Login</Text>
+        <Text>user1 password</Text>
       </View>
       <Animatable.View
         style={[
@@ -139,7 +140,7 @@ const SignInScreen = ({ navigation }) => {
             autoCapitalize="none"
             onChangeText={(val) => textInputChange(val)}
             // onEndEditing={(evt) => handleValidUser(evt.nativeEvent.text)} // not firing
-            onEndEditing={(evt) => console.log(evt.nativeEvent.text)}
+            onEndEditing={(evt) => console.log(evt.nativeEvent.text)} // also not firing?
           />
           {data.check_textInputChange ? (
             <Animatable.View animation="bounceIn">

@@ -2,7 +2,14 @@
 // ScenarioScreen.js
 // =============================
 import React from "react";
-import { View, Text, Button, StyleSheet, Dimensions } from "react-native";
+import {
+  View,
+  Text,
+  Button,
+  StyleSheet,
+  Dimensions,
+  ScrollView,
+} from "react-native";
 import { TextInput } from "react-native-paper";
 import { LinearGradient } from "expo-linear-gradient";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -234,86 +241,87 @@ const ScenarioScreen = () => {
       )}
       {data.inputTab ? (
         <View>
-          <View style={{ paddingLeft: 5, paddingRight: 5 }}>
-            <TextInput
-              label="Age"
-              value={data.currentAge}
-              placeholder="Enter your current age here"
-              onChangeText={(value) =>
-                setData({
-                  ...data,
-                  currentAge: value,
-                })
-              }
-            />
-            <TextInput
-              label="Retirement Age"
-              value={data.retirementAge}
-              placeholder="Desired retirement age"
-              onChangeText={(value) =>
-                setData({
-                  ...data,
-                  retirementAge: value,
-                })
-              }
-            />
-            <TextInput
-              label="Current Savings"
-              value={data.currentSavings}
-              placeholder="Your current savings"
-              onChangeText={(value) =>
-                setData({
-                  ...data,
-                  currentSavings: value,
-                })
-              }
-            />
-            <TextInput
-              label="Annual Deposit"
-              value={data.annualDeposit}
-              placeholder="Yearly savings deposit"
-              onChangeText={(value) =>
-                setData({
-                  ...data,
-                  annualDeposit: value,
-                })
-              }
-            />
-            <TextInput
-              label="Interest Rate"
-              value={data.interestRate}
-              placeholder="Savings Interest Rate"
-              onChangeText={(value) =>
-                setData({
-                  ...data,
-                  interestRate: value,
-                })
-              }
-            />
-            <TextInput
-              label="Years after retirement"
-              value={data.yearsAfterRetirement}
-              placeholder="Years after retirement"
-              onChangeText={(value) =>
-                setData({
-                  ...data,
-                  yearsAfterRetirement: value,
-                })
-              }
-            />
-            <TextInput
-              label="Desired Retirement Income"
-              value={data.desiredRetirementIncome}
-              placeholder="Desired Retirement Income"
-              onChangeText={(value) =>
-                setData({
-                  ...data,
-                  desiredRetirementIncome: value,
-                })
-              }
-            />
+          <ScrollView>
+            <View style={{ paddingLeft: 5, paddingRight: 5 }}>
+              <TextInput
+                label="Age"
+                value={data.currentAge}
+                placeholder="Enter your current age here"
+                onChangeText={(value) =>
+                  setData({
+                    ...data,
+                    currentAge: value,
+                  })
+                }
+              />
+              <TextInput
+                label="Retirement Age"
+                value={data.retirementAge}
+                placeholder="Desired retirement age"
+                onChangeText={(value) =>
+                  setData({
+                    ...data,
+                    retirementAge: value,
+                  })
+                }
+              />
+              <TextInput
+                label="Current Savings"
+                value={data.currentSavings}
+                placeholder="Your current savings"
+                onChangeText={(value) =>
+                  setData({
+                    ...data,
+                    currentSavings: value,
+                  })
+                }
+              />
+              <TextInput
+                label="Annual Deposit"
+                value={data.annualDeposit}
+                placeholder="Yearly savings deposit"
+                onChangeText={(value) =>
+                  setData({
+                    ...data,
+                    annualDeposit: value,
+                  })
+                }
+              />
+              <TextInput
+                label="Interest Rate"
+                value={data.interestRate}
+                placeholder="Savings Interest Rate"
+                onChangeText={(value) =>
+                  setData({
+                    ...data,
+                    interestRate: value,
+                  })
+                }
+              />
+              <TextInput
+                label="Years after retirement"
+                value={data.yearsAfterRetirement}
+                placeholder="Years after retirement"
+                onChangeText={(value) =>
+                  setData({
+                    ...data,
+                    yearsAfterRetirement: value,
+                  })
+                }
+              />
+              <TextInput
+                label="Desired Retirement Income"
+                value={data.desiredRetirementIncome}
+                placeholder="Desired Retirement Income"
+                onChangeText={(value) =>
+                  setData({
+                    ...data,
+                    desiredRetirementIncome: value,
+                  })
+                }
+              />
 
-            {/* <RadioButton.Group
+              {/* <RadioButton.Group
               onValueChange={(value) =>
                 setData({
                   ...data,
@@ -325,138 +333,109 @@ const ScenarioScreen = () => {
               <RadioButton.Item label="Single" value="S" />
               <RadioButton.Item label="Married" value="M" />
             </RadioButton.Group> */}
-            {/* end of Input section View             */}
-          </View>
+              {/* end of Input section View             */}
+            </View>
 
-          <TouchableOpacity
-            style={[
-              styles.signIn,
-              {
-                borderColor: "#f57576",
-                borderWidth: 1,
-                marginTop: 15,
-              },
-            ]}
-            onPress={() => console.log("Pressed")}
-          >
-            <LinearGradient
-              colors={["#f57576", "#a23425"]}
-              style={styles.signIn}
+            <TouchableOpacity
+              style={[
+                styles.signIn,
+                {
+                  borderColor: "#f57576",
+                  borderWidth: 1,
+                  marginTop: 15,
+                },
+              ]}
+              onPress={() => calculate()}
             >
-              <Text style={[styles.textSign, { color: "#fff" }]}>Advanced</Text>
-            </LinearGradient>
-          </TouchableOpacity>
+              <LinearGradient
+                colors={["#f57576", "#a23425"]}
+                style={styles.signIn}
+              >
+                <Text style={[styles.textSign, { color: "#fff" }]}>
+                  Calculate
+                </Text>
+              </LinearGradient>
+            </TouchableOpacity>
 
-          <TouchableOpacity
-            style={[
-              styles.signIn,
-              {
-                borderColor: "#f57576",
-                borderWidth: 1,
-                marginTop: 15,
-              },
-            ]}
-            onPress={() => calculate()}
-          >
-            <LinearGradient
-              colors={["#f57576", "#a23425"]}
-              style={styles.signIn}
+            <TouchableOpacity
+              style={[
+                styles.signIn,
+                {
+                  borderColor: "#f57576",
+                  borderWidth: 1,
+                  marginTop: 15,
+                },
+              ]}
+              onPress={() => console.log("Pressed")}
             >
-              <Text style={[styles.textSign, { color: "#fff" }]}>
-                Calculate
-              </Text>
-            </LinearGradient>
-          </TouchableOpacity>
+              <LinearGradient
+                colors={["#f57576", "#a23425"]}
+                style={styles.signIn}
+              >
+                <Text style={[styles.textSign, { color: "#fff" }]}>
+                  Advanced
+                </Text>
+              </LinearGradient>
+            </TouchableOpacity>
+          </ScrollView>
         </View>
       ) : (
         // Results page goes here
 
-        <View style={styles.zingchartStyle}>
-          <View>
-            <LineChart
-              data={{
-                labels: [labels],
-                datasets: [
-                  {
-                    data: data.yearsData,
+        <View style={styles.chartStyle}>
+          <ScrollView>
+            <View>
+              <LineChart
+                data={{
+                  labels: [labels],
+                  datasets: [
+                    {
+                      data: data.yearsData,
+                    },
+                  ],
+                }}
+                width={Dimensions.get("window").width - 10} // from react-native
+                height={350}
+                yAxisLabel="$"
+                yAxisInterval={50000} // optional, defaults to 1
+                chartConfig={{
+                  backgroundColor: "#a23425",
+                  backgroundGradientFrom: "#ff7878",
+                  backgroundGradientTo: "#ffa395",
+                  decimalPlaces: 0, // optional, defaults to 2dp
+                  color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                  labelColor: (opacity = 1) =>
+                    `rgba(255, 255, 255, ${opacity})`,
+                  style: {
+                    borderRadius: 16,
                   },
-                ],
-              }}
-              width={Dimensions.get("window").width - 10} // from react-native
-              height={500}
-              yAxisLabel="$"
-              //yAxisSuffix="k"
-              yAxisInterval={50000} // optional, defaults to 1
-              //             const config = {
-              //   "scale-x": { values: labels, label: { text: "Age" } },
-              //   "scale-y": {
-              //     values: scaleYval,
-              //     short: true, //To display scale values as short units.
-              //     "short-unit": "K", //To set the short unit type.
-              //     "thousands-separator": ",",
-              //     format: "$%v",
-              //     item: {
-              //       "font-size": 10,
-              //       angle: -30,
-              //     },
-              //   },
-              //   plot: {
-              //     tooltip: {
-              //       text: "$%v<br>at Age %kv",
-              //       "thousands-separator": ",",
-              //     },
-              //   },
-              //   type: "area",
-              //   title: { text: "Projected Results", fontSize: 12 },
-              //   series: [
-              //     {
-              //       values: data.yearsData,
-              //       "background-color": "#a23425",
-              //       "line-color": "#ea4646",
-              //       marker: {
-              //         "background-color": "#ff7878",
-              //         size: 4,
-              //       },
-              //     },
-              //   ],
-              // };
-              chartConfig={{
-                backgroundColor: "#a23425",
-                backgroundGradientFrom: "#ff7878",
-                backgroundGradientTo: "#ffa395",
-                decimalPlaces: 0, // optional, defaults to 2dp
-                color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                style: {
+                  propsForDots: {
+                    r: "4",
+                    strokeWidth: "2",
+                    stroke: "#ea4646",
+                  },
+                }}
+                bezier
+                style={{
+                  marginVertical: 8,
                   borderRadius: 16,
-                },
-                propsForDots: {
-                  r: "4",
-                  strokeWidth: "2",
-                  stroke: "#ea4646",
-                },
-              }}
-              bezier
-              style={{
-                marginVertical: 8,
-                borderRadius: 16,
-              }}
-            />
-          </View>
+                }}
+              />
+            </View>
 
-          <Text style={styles.info}>
-            Total Retirement Savings: {data.futureValueTwo}
-          </Text>
-          {data.onTrack ? (
-            <Text style={styles.success}>
-              Annual Retirement Income: {toAud(data.annualRetirementIncome)}
+            <Text style={styles.info}>
+              Total Retirement Savings: {data.futureValueTwo}
             </Text>
-          ) : (
-            <Text style={styles.danger}>
-              Annual Retirement Income: {toAud(data.annualRetirementIncome)}
-            </Text>
-          )}
-          <Button
+            {data.onTrack ? (
+              <Text style={styles.success}>
+                Annual Retirement Income: {toAud(data.annualRetirementIncome)}
+              </Text>
+            ) : (
+              <Text style={styles.danger}>
+                Annual Retirement Income: {toAud(data.annualRetirementIncome)}
+              </Text>
+            )}
+            {/* <Button
             onPress={() =>
               console.log(
                 "currAge ",
@@ -484,7 +463,8 @@ const ScenarioScreen = () => {
               )
             }
             title="Console log"
-          />
+          /> */}
+          </ScrollView>
         </View>
       )}
     </View>
@@ -546,7 +526,7 @@ const styles = StyleSheet.create({
     margin: 10,
     padding: 10,
   },
-  zingchartStyle: {
+  chartStyle: {
     margin: 0,
     padding: 0,
   },
