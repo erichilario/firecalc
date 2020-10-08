@@ -384,6 +384,18 @@ const ScenarioScreen = () => {
 
         <View style={styles.chartStyle}>
           <ScrollView>
+            <Text style={styles.info}>
+              Total Retirement Savings: {data.futureValueTwo}
+            </Text>
+            {data.onTrack ? (
+              <Text style={styles.success}>
+                Annual Retirement Income: {toAud(data.annualRetirementIncome)}
+              </Text>
+            ) : (
+              <Text style={styles.danger}>
+                Annual Retirement Income: {toAud(data.annualRetirementIncome)}
+              </Text>
+            )}
             <View>
               <LineChart
                 data={{
@@ -395,7 +407,7 @@ const ScenarioScreen = () => {
                   ],
                 }}
                 width={Dimensions.get("window").width - 10} // from react-native
-                height={350}
+                height={250}
                 yAxisLabel="$"
                 yAxisInterval={50000} // optional, defaults to 1
                 chartConfig={{
@@ -423,18 +435,6 @@ const ScenarioScreen = () => {
               />
             </View>
 
-            <Text style={styles.info}>
-              Total Retirement Savings: {data.futureValueTwo}
-            </Text>
-            {data.onTrack ? (
-              <Text style={styles.success}>
-                Annual Retirement Income: {toAud(data.annualRetirementIncome)}
-              </Text>
-            ) : (
-              <Text style={styles.danger}>
-                Annual Retirement Income: {toAud(data.annualRetirementIncome)}
-              </Text>
-            )}
             {/* <Button
             onPress={() =>
               console.log(
