@@ -24,7 +24,7 @@ A [Trello board](https://trello.com/b/NGIJ8T3a) is utilised as a project managem
 
 ## Purpose
 
-In completion of Assignment 2 of HIT238 - The Mobile Paradigm with [@melvey](https://github.com/melvey) as lecturer.
+In completion of Assignment 2 of HIT238 - The Mobile Paradigm taught by [@melvey](https://github.com/melvey).
 
 ## Milestones and major developments at a glance
 
