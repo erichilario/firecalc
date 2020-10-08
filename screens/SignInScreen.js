@@ -115,7 +115,7 @@ const SignInScreen = ({ navigation }) => {
       <StatusBar backgroundColor="#f57576" barStyle="light-content" />
       <View style={styles.header}>
         <Text style={styles.text_header}>Login</Text>
-        <Text>user1 password</Text>
+        {/* <Text>user1 password</Text> */}
       </View>
       <Animatable.View
         style={[
