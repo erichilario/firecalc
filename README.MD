@@ -14,7 +14,7 @@ Run the app to see it in action:
 
 ## Demo
 
-<img src="https://raw.githubusercontent.com/erichilario/firecalc/blob/master/demo/2020-10-03%2018-46-36.gif" width="360">
+<img src="https://raw.githubusercontent.com/erichilario/firecalc/master/demo/2020-10-03%2018-46-36.gif" width="360">
 - _(as of 3/10/20; will be updated as the project progresses)_
 
 ## Trello
@@ -31,7 +31,7 @@ In completion of Assignment 2 of HIT238 - The Mobile Paradigm taught by [@melvey
 
 - Initial commit, fit-out of test code, setup of development environment
 
-[x] [Sprint 2]() Completed 8/10/20
+[x] [Sprint 2](https://github.com/erichilario/firecalc/commit/5a8e2b162b5e18d065c5e04692a7fbcc6870961a) Completed 8/10/20
 
 - Splash/SignIn/SignUp screens, slide-in drawer navigation, basic auth system, main Scenario screen with switch between input and result, graphs in the result screen, and a basic retirement calculator option
 
