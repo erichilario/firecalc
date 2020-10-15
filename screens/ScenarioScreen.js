@@ -21,18 +21,17 @@ import {
   ContributionGraph,
   StackedBarChart,
 } from "react-native-chart-kit";
-// import "zingchart/es6";
-// import ZingChart from "zingchart-react";
+import Slider from "@react-native-community/slider";
 
-const ScenarioScreen = () => {
+const ScenarioScreen = ({ navigation }) => {
   const [data, setData] = React.useState({
     currentAge: "25",
-    retirementAge: "68",
+    retirementAge: "67",
     inputTab: true,
     relationshipStatus: "M",
-    currentSavings: "1000",
-    annualDeposit: "6000",
-    interestRate: "8",
+    currentSavings: "20000",
+    annualDeposit: "20000",
+    interestRate: "4",
     yearsAfterRetirement: "20",
     desiredRetirementIncome: "100000",
     //calc
@@ -68,6 +67,7 @@ const ScenarioScreen = () => {
       annualRetirementIncome: toAud(annual_retirement_income),
       annualRetIncNum: annual_retirement_income,
       onTrack: on_track,
+      inputTab: false,
     });
   };
 
@@ -242,7 +242,7 @@ const ScenarioScreen = () => {
       {data.inputTab ? (
         <View>
           <ScrollView>
-            <View style={{ paddingLeft: 5, paddingRight: 5 }}>
+            <View style={{ flex: 2, paddingLeft: 5, paddingRight: 5 }}>
               <TextInput
                 label="Age"
                 value={data.currentAge}
@@ -254,6 +254,21 @@ const ScenarioScreen = () => {
                   })
                 }
               />
+              <Slider
+                style={{ width: "95%", height: 40 }}
+                minimumValue={12}
+                maximumValue={65}
+                value={data.currentAge}
+                minimumTrackTintColor="#ff9090"
+                maximumTrackTintColor="#aeafab"
+                thumbTintColor="#bf6976"
+                onSlidingComplete={(value) =>
+                  setData({
+                    ...data,
+                    currentAge: Math.round(value),
+                  })
+                }
+              />
               <TextInput
                 label="Retirement Age"
                 value={data.retirementAge}
@@ -262,6 +277,21 @@ const ScenarioScreen = () => {
                   setData({
                     ...data,
                     retirementAge: value,
+                  })
+                }
+              />
+              <Slider
+                style={{ width: "95%", height: 40 }}
+                minimumValue={20}
+                maximumValue={85}
+                value={data.retirementAge}
+                minimumTrackTintColor="#ff9090"
+                maximumTrackTintColor="#aeafab"
+                thumbTintColor="#bf6976"
+                onSlidingComplete={(value) =>
+                  setData({
+                    ...data,
+                    retirementAge: Math.round(value),
                   })
                 }
               />
@@ -366,7 +396,7 @@ const ScenarioScreen = () => {
                   marginTop: 15,
                 },
               ]}
-              onPress={() => console.log("Pressed")}
+              onPress={() => navigation.navigate("Advanced Scenario")}
             >
               <LinearGradient
                 colors={["#f57576", "#a23425"]}

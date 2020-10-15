@@ -14,6 +14,7 @@ import HelpScreen from "./HelpScreen";
 import AboutScreen from "./AboutScreen";
 import ContactScreen from "./ContactScreen";
 import ScenarioScreen from "./ScenarioScreen";
+import AdvScenarioScreen from "./AdvScenarioScreen";
 
 import Icon from "react-native-vector-icons/Ionicons";
 
@@ -24,6 +25,7 @@ const HelpStack = createStackNavigator();
 const AboutStack = createStackNavigator();
 const ContactStack = createStackNavigator();
 const ScenarioStack = createStackNavigator();
+const AdvScenarioStack = createStackNavigator();
 
 const RootStackScreen = ({ navigation }) => {
   return (
@@ -222,6 +224,37 @@ const ScenarioStackScreen = ({ navigation }) => {
   );
 };
 
+const AdvScenarioStackScreen = ({ navigation }) => {
+  return (
+    <AdvScenarioStack.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: "#f57576",
+        },
+        headerTintColor: "#fff",
+        headerTitleStyle: {
+          fontWeight: "bold",
+        },
+      }}
+    >
+      <ScenarioStack.Screen
+        name="Advanced Scenario"
+        component={AdvScenarioScreen}
+        options={{
+          headerLeft: () => (
+            <Icon.Button
+              name="ios-menu"
+              size={25}
+              backgroundColor="#f57576"
+              onPress={() => navigation.openDrawer()}
+            ></Icon.Button>
+          ),
+        }}
+      />
+    </AdvScenarioStack.Navigator>
+  );
+};
+
 export {
   RootStackScreen,
   HomeStackScreen,
@@ -230,4 +263,5 @@ export {
   AboutStackScreen,
   ContactStackScreen,
   ScenarioStackScreen,
+  AdvScenarioStackScreen,
 };

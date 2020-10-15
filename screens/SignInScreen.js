@@ -95,6 +95,11 @@ const SignInScreen = ({ navigation }) => {
       return userName == item.username && password == item.password;
     });
 
+    if (data.username.length == 0 || data.password.length == 0) {
+      alert("Username or password cannot be empty.");
+      return;
+    }
+
     if (foundUser.length == 0) {
       alert("Username or password is incorrect.");
       // Alert.alert("Invalid user!", "Username or password is incorrect.", [
@@ -105,10 +110,6 @@ const SignInScreen = ({ navigation }) => {
     signIn(foundUser);
     //location.reload();
   }
-
-  const loginHandle = (username, password) => {
-    signIn(username, password);
-  };
 
   return (
     <View style={styles.container}>

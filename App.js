@@ -20,6 +20,7 @@ import {
   AboutStackScreen,
   ContactStackScreen,
   ScenarioStackScreen,
+  AdvScenarioStackScreen,
 } from "./screens/RootStackScreen";
 import { ActivityIndicator } from "react-native-paper";
 import { AuthContext } from "./components/context";
@@ -155,6 +156,10 @@ const App = () => {
             <Drawer.Screen name="About" component={AboutStackScreen} />
             <Drawer.Screen name="Contact" component={ContactStackScreen} />
             <Drawer.Screen name="Scenario" component={ScenarioStackScreen} />
+            <Drawer.Screen
+              name="Advanced Scenario"
+              component={AdvScenarioStackScreen}
+            />
           </Drawer.Navigator>
         ) : (
           <RootStackScreen />
