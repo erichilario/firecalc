@@ -5,7 +5,7 @@ const Users = [
   {
     id: 1,
     email: "user1@email.com",
-    username: "user1",
+    username: "ehilario",
     password: "password",
     userToken: "token123",
   },

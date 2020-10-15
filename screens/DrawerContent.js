@@ -15,7 +15,7 @@ import {
 } from "react-native-paper";
 import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import myAvatar from "../assets/avatar.jpg";
+import myAvatar from "../assets/ehilario.jpg";
 import { AuthContext } from "../components/context";
 import IonIcon from "react-native-vector-icons/Ionicons";
 
@@ -44,8 +44,8 @@ export function DrawerContent(props) {
                 alignItems: "center",
               }}
             >
-              <Title style={styles.title}>Kelly Masters</Title>
-              <Caption style={styles.caption}>@kmasters</Caption>
+              <Title style={styles.title}>Eric Hilario</Title>
+              <Caption style={styles.caption}>@ehilario</Caption>
             </View>
             <Drawer.Section style={styles.drawerSection}>
               <DrawerItem
