@@ -1,11 +1,11 @@
 {
   "files": {
-    "app.js": "/firecalc/static/js/app.d7cd23cb.chunk.js",
-    "app.js.map": "/firecalc/static/js/app.d7cd23cb.chunk.js.map",
+    "app.js": "/firecalc/static/js/app.f2431b1e.chunk.js",
+    "app.js.map": "/firecalc/static/js/app.f2431b1e.chunk.js.map",
     "runtime~app.js": "/firecalc/static/js/runtime~app.4a8d8b15.js",
     "runtime~app.js.map": "/firecalc/static/js/runtime~app.4a8d8b15.js.map",
-    "static/js/2.503a7226.chunk.js": "/firecalc/static/js/2.503a7226.chunk.js",
-    "static/js/2.503a7226.chunk.js.map": "/firecalc/static/js/2.503a7226.chunk.js.map",
+    "static/js/2.08bed10f.chunk.js": "/firecalc/static/js/2.08bed10f.chunk.js",
+    "static/js/2.08bed10f.chunk.js.map": "/firecalc/static/js/2.08bed10f.chunk.js.map",
     "fonts/Feather.ttf": "/firecalc/./fonts/Feather.ttf",
     "fonts/FontAwesome.ttf": "/firecalc/./fonts/FontAwesome.ttf",
     "fonts/Ionicons.ttf": "/firecalc/./fonts/Ionicons.ttf",
@@ -17,7 +17,7 @@
     "index.html": "/firecalc/index.html",
     "manifest.json": "/firecalc/manifest.json",
     "serve.json": "/firecalc/serve.json",
-    "static/js/2.503a7226.chunk.js.LICENSE.txt": "/firecalc/static/js/2.503a7226.chunk.js.LICENSE.txt",
+    "static/js/2.08bed10f.chunk.js.LICENSE.txt": "/firecalc/static/js/2.08bed10f.chunk.js.LICENSE.txt",
     "static/media/barchart.jpg": "/firecalc/static/media/barchart.a3e33dca.jpg",
     "static/media/ehilario.jpg": "/firecalc/static/media/ehilario.d468c577.jpg",
     "static/media/favicon.png": "/firecalc/static/media/favicon.fe8d62f5.png",
@@ -25,7 +25,7 @@
   },
   "entrypoints": [
     "static/js/runtime~app.4a8d8b15.js",
-    "static/js/2.503a7226.chunk.js",
-    "static/js/app.d7cd23cb.chunk.js"
+    "static/js/2.08bed10f.chunk.js",
+    "static/js/app.f2431b1e.chunk.js"
   ]
 }
