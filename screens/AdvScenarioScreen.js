@@ -22,6 +22,8 @@ import barChartA from "../assets/barchart.jpg";
 
 const AdvScenarioScreen = () => {
   const [data, setData] = React.useState({
+    collapseIsOpen: false,
+    collapseDetailsIsOpen: true,
     inputTab: true,
     relationshipStatus: "M",
     currentSavings: "20000",
@@ -358,8 +360,91 @@ const AdvScenarioScreen = () => {
         <View>
           <ScrollView>
             <View style={{ paddingLeft: 5, paddingRight: 5 }}>
+              {data.collapseIsOpen ? (
+                <View>
+                  <TouchableOpacity
+                    style={[
+                      styles.collapseButton,
+                      {
+                        borderColor: "#f57576",
+                        borderWidth: 1,
+                        marginTop: 5,
+                      },
+                    ]}
+                    onPress={() =>
+                      setData({
+                        ...data,
+                        collapseIsOpen: false,
+                        collapseDetailsIsOpen: false,
+                      })
+                    }
+                  >
+                    <LinearGradient
+                      colors={["#f57576", "#a23425"]}
+                      style={styles.collapseButton}
+                    >
+                      <Text style={{ color: "#fff", fontSize: 10 }}>
+                        Collapse all
+                      </Text>
+                    </LinearGradient>
+                  </TouchableOpacity>
+
+                  {/* <Button
+                  onPress={() =>
+                    setData({
+                      ...data,
+                      collapseIsOpen: false,
+                      collapseDetailsIsOpen: false,
+                    })
+                  }
+                  title="Collapse all"
+                /> */}
+                </View>
+              ) : (
+                <View>
+                  <TouchableOpacity
+                    style={[
+                      styles.collapseButton,
+                      {
+                        borderColor: "#f57576",
+                        borderWidth: 1,
+                        marginTop: 5,
+                      },
+                    ]}
+                    onPress={() =>
+                      setData({
+                        ...data,
+                        collapseIsOpen: true,
+                        collapseDetailsIsOpen: true,
+                      })
+                    }
+                  >
+                    <LinearGradient
+                      colors={["#f57576", "#a23425"]}
+                      style={styles.collapseButton}
+                    >
+                      <Text style={{ color: "#fff", fontSize: 10 }}>
+                        Expand all
+                      </Text>
+                    </LinearGradient>
+                  </TouchableOpacity>
+                  {/* <Button
+                  onPress={() =>
+                    setData({
+                      ...data,
+                      collapseIsOpen: true,
+                      collapseDetailsIsOpen: true,
+                    })
+                  }
+                  title="Expand all"
+                /> */}
+                </View>
+              )}
               <View style={{ marginBottom: 10 }}>
-                <Collapsible trigger="Your choices ▽" open>
+                <Collapsible
+                  trigger="Your choices ▽"
+                  open={data.collapseDetailsIsOpen}
+                >
                   <TextInput
                     label="Age stop saving (semi-retire)"
                     value={data.ageStopSaving}
@@ -396,7 +481,10 @@ const AdvScenarioScreen = () => {
                 </Collapsible>
               </View>
               <View style={{ marginBottom: 10 }}>
-                <Collapsible trigger="Your details ▽">
+                <Collapsible
+                  open={data.collapseIsOpen}
+                  trigger="Your details ▽"
+                >
                   <TextInput
                     label="Age"
                     value={data.currentAge}
@@ -444,7 +532,10 @@ const AdvScenarioScreen = () => {
                 </Collapsible>
               </View>
               <View style={{ marginBottom: 10 }}>
-                <Collapsible trigger="Your Superannuation ▽">
+                <Collapsible
+                  open={data.collapseIsOpen}
+                  trigger="Your Superannuation ▽"
+                >
                   <TextInput
                     label="Current balance"
                     value={data.superBalance}
@@ -503,7 +594,10 @@ const AdvScenarioScreen = () => {
                 </Collapsible>
               </View>
               <View style={{ marginBottom: 10 }}>
-                <Collapsible trigger="Your Principal Place of Residence (PPOR) ▽">
+                <Collapsible
+                  open={data.collapseIsOpen}
+                  trigger="Your Principal Place of Residence (PPOR) ▽"
+                >
                   <TextInput
                     label="PPOR Current Value"
                     value={data.pporCurrentValue}
@@ -551,7 +645,10 @@ const AdvScenarioScreen = () => {
                 </Collapsible>
               </View>
               <View style={{ marginBottom: 10 }}>
-                <Collapsible trigger="Your Stock Portfolio ▽">
+                <Collapsible
+                  open={data.collapseIsOpen}
+                  trigger="Your Stock Portfolio ▽"
+                >
                   <TextInput
                     label="Current Value of ETF/LIC"
                     value={data.currentETFLICValue}
@@ -588,7 +685,10 @@ const AdvScenarioScreen = () => {
                 </Collapsible>
               </View>
               <View style={{ marginBottom: 10 }}>
-                <Collapsible trigger="Your Investment Property/Properties (IP) ▽">
+                <Collapsible
+                  open={data.collapseIsOpen}
+                  trigger="Your Investment Property/Properties (IP) ▽"
+                >
                   <TextInput
                     label="IP Current Value"
                     value={data.ipCurrentValue}
@@ -636,7 +736,7 @@ const AdvScenarioScreen = () => {
                 </Collapsible>
               </View>
               <View style={{ marginBottom: 10 }}>
-                <Collapsible trigger="Assumptions ▽">
+                <Collapsible open={data.collapseIsOpen} trigger="Assumptions ▽">
                   <TextInput
                     label="IP Yield per annum"
                     value={data.ipYieldPA}
@@ -673,7 +773,7 @@ const AdvScenarioScreen = () => {
                 </Collapsible>
               </View>
               <View style={{ marginBottom: 10 }}>
-                <Collapsible trigger="Windfall(s) ▽">
+                <Collapsible open={data.collapseIsOpen} trigger="Windfall(s) ▽">
                   <TextInput
                     label="Windfall 1 Year"
                     value={data.windfall1Year}
@@ -721,7 +821,10 @@ const AdvScenarioScreen = () => {
                 </Collapsible>
               </View>
               <View style={{ marginBottom: 10 }}>
-                <Collapsible trigger="Other Passive Income ▽">
+                <Collapsible
+                  open={data.collapseIsOpen}
+                  trigger="Other Passive Income ▽"
+                >
                   <TextInput
                     label="Passive income year started"
                     value={data.passiveIncomeStartYear}
@@ -758,7 +861,10 @@ const AdvScenarioScreen = () => {
                 </Collapsible>
               </View>
               <View style={{ marginBottom: 10 }}>
-                <Collapsible trigger="Temporary higher expenses ▽">
+                <Collapsible
+                  open={data.collapseIsOpen}
+                  trigger="Temporary higher expenses ▽"
+                >
                   <TextInput
                     label="Year temporary expense started"
                     value={data.tempExpenseStartYear}
@@ -979,6 +1085,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 50,
+  },
+  collapseButton: {
+    width: "100%",
+    height: 15,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 20,
   },
   textSign: {
     fontSize: 18,
