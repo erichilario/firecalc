@@ -19,6 +19,7 @@ import Collapsible from "react-collapsible";
 import { block } from "react-native-reanimated";
 import lineChartA from "../assets/linechart.jpg";
 import barChartA from "../assets/barchart.jpg";
+import Slider from "@react-native-community/slider";
 
 const AdvScenarioScreen = () => {
   const [data, setData] = React.useState({
@@ -456,6 +457,21 @@ const AdvScenarioScreen = () => {
                       })
                     }
                   />
+                  <Slider
+                    style={{ width: "95%", height: 40 }}
+                    minimumValue={20}
+                    maximumValue={85}
+                    value={data.ageStopSaving}
+                    minimumTrackTintColor="#ff9090"
+                    maximumTrackTintColor="#aeafab"
+                    thumbTintColor="#bf6976"
+                    onSlidingComplete={(value) =>
+                      setData({
+                        ...data,
+                        ageStopSaving: Math.round(value),
+                      })
+                    }
+                  />
                   <TextInput
                     label="Retirement Age"
                     value={data.retirementAge}
@@ -464,6 +480,21 @@ const AdvScenarioScreen = () => {
                       setData({
                         ...data,
                         retirementAge: value,
+                      })
+                    }
+                  />
+                  <Slider
+                    style={{ width: "95%", height: 40 }}
+                    minimumValue={20}
+                    maximumValue={85}
+                    value={data.retirementAge}
+                    minimumTrackTintColor="#ff9090"
+                    maximumTrackTintColor="#aeafab"
+                    thumbTintColor="#bf6976"
+                    onSlidingComplete={(value) =>
+                      setData({
+                        ...data,
+                        retirementAge: Math.round(value),
                       })
                     }
                   />
@@ -493,6 +524,21 @@ const AdvScenarioScreen = () => {
                       setData({
                         ...data,
                         currentAge: value,
+                      })
+                    }
+                  />
+                  <Slider
+                    style={{ width: "95%", height: 40 }}
+                    minimumValue={12}
+                    maximumValue={65}
+                    value={data.currentAge}
+                    minimumTrackTintColor="#ff9090"
+                    maximumTrackTintColor="#aeafab"
+                    thumbTintColor="#bf6976"
+                    onSlidingComplete={(value) =>
+                      setData({
+                        ...data,
+                        currentAge: Math.round(value),
                       })
                     }
                   />
