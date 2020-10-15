@@ -383,21 +383,29 @@ const ScenarioScreen = () => {
         // Results page goes here
 
         <View style={styles.chartStyle}>
-          <ScrollView>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={true}>
             <View>
               <LineChart
                 data={{
-                  labels: [labels],
+                  labels: labels,
                   datasets: [
                     {
                       data: data.yearsData,
                     },
                   ],
                 }}
-                width={Dimensions.get("window").width - 10} // from react-native
+                //width={Dimensions.get("window").width - 16} // from react-native
+                width={600}
                 height={350}
                 yAxisLabel="$"
+                // need this to shorten thousands to "K"
+                // formatYLabel={(label, index) =>
+                //   `${getFormatedLabel(label, index)}`
+                // }
                 yAxisInterval={50000} // optional, defaults to 1
+                hidePointsAtIndex={Array.from({ length: 100 }, (v, k) =>
+                  k % 2 === 0 ? k : null
+                )}
                 chartConfig={{
                   backgroundColor: "#a23425",
                   backgroundGradientFrom: "#ff7878",
@@ -419,21 +427,12 @@ const ScenarioScreen = () => {
                 style={{
                   marginVertical: 8,
                   borderRadius: 16,
+                  marginLeft: 10,
                 }}
+                paddingLeft="15"
               />
             </View>
-            <Text style={styles.info}>
-              Total Retirement Savings: {data.futureValueTwo}
-            </Text>
-            {data.onTrack ? (
-              <Text style={styles.success}>
-                Annual Retirement Income: {toAud(data.annualRetirementIncome)}
-              </Text>
-            ) : (
-              <Text style={styles.danger}>
-                Annual Retirement Income: {toAud(data.annualRetirementIncome)}
-              </Text>
-            )}
+
             {/* <Button
             onPress={() =>
               console.log(
@@ -464,6 +463,20 @@ const ScenarioScreen = () => {
             title="Console log"
           /> */}
           </ScrollView>
+          <View>
+            <Text style={styles.info}>
+              Total Retirement Savings: {data.futureValueTwo}
+            </Text>
+            {data.onTrack ? (
+              <Text style={styles.success}>
+                Annual Retirement Income: {toAud(data.annualRetirementIncome)}
+              </Text>
+            ) : (
+              <Text style={styles.danger}>
+                Annual Retirement Income: {toAud(data.annualRetirementIncome)}
+              </Text>
+            )}
+          </View>
         </View>
       )}
     </View>
